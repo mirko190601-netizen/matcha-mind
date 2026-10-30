@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs><linearGradient id="stoneGrad" x1="20%" y1="8%" x2="85%" y2="95%"><stop offset="0%" stop-color="#f6f4ec"/><stop offset="55%" stop-color="#f3f0e6"/><stop offset="100%" stop-color="#cfc2b2"/></linearGradient><radialGradient id="goldGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e2b84f" stop-opacity="0.6"/><stop offset="100%" stop-color="#e2b84f" stop-opacity="0"/></radialGradient></defs>
+  
+  <ellipse cx="80" cy="148" rx="26" ry="7" fill="#5c4330" fill-opacity="0.16"/>
+  <path d="M56,138 C54,142 106,142 104,138 C106,132 54,132 56,138 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M68,132 L68,96 C68,93 92,93 92,96 L92,132 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1"/>
+  <path d="M58,96 C56,100 104,100 102,96 C104,90 56,90 58,96 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M62,90 L62,58 C62,54 98,54 98,58 L98,90 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1.1"/>
+  <circle cx="80" cy="70" r="9" fill="#a09182" stroke="#5c4330" stroke-width="1"/>
+  
+  <circle cx="80" cy="70" r="9" fill="none" stroke="#5c4330" stroke-width="1"/>
+  <path d="M54,58 C50,50 110,50 106,58 C112,62 48,62 54,58 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M60,50 C64,38 96,38 100,50 C94,44 66,44 60,50 Z" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="1.1" stroke-linejoin="round"/>
+  <ellipse cx="80" cy="36" rx="5" ry="4" fill="url(#stoneGrad)" stroke="#5c4330" stroke-width="0.9"/>
+  <ellipse cx="59" cy="137" rx="5" ry="3" fill="#a9c79f"/>
+  <ellipse cx="68" cy="140" rx="3.5" ry="2.4" fill="#4e7154"/>
+  <ellipse cx="100" cy="138" rx="4.5" ry="2.8" fill="#a9c79f"/>
+  
+</svg>

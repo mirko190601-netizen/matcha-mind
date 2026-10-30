@@ -1,0 +1,25 @@
+# Geheimnisse / Schlüssel – niemals ins Repo
+*.p8
+*.p12
+*.mobileprovision
+.env
+
+# Build-Artefakte
+.build/
+DerivedData/
+*.xcodeproj
+
+# Von XcodeGen generiert, nicht versioniert
+*.xcworkspace
+
+# macOS
+.DS_Store
+
+# Weitere Geheimnisse / Release-Artefakte (REPO-SICHERHEIT E7)
+*.cer
+*.ipa
+*.xcarchive
+.env*
+Config/Secrets.xcconfig
+deploykey*
+build/

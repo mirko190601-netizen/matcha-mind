@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs><linearGradient id="bridgeGrad" x1="15%" y1="5%" x2="90%" y2="100%"><stop offset="0%" stop-color="#bc9676"/><stop offset="55%" stop-color="#a9784f"/><stop offset="100%" stop-color="#7d593b"/></linearGradient><linearGradient id="waterGrad" x1="20%" y1="8%" x2="85%" y2="95%"><stop offset="0%" stop-color="#86a18a"/><stop offset="55%" stop-color="#5e8263"/><stop offset="100%" stop-color="#6d936c"/></linearGradient><radialGradient id="goldGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f5d66b" stop-opacity="0.6"/><stop offset="100%" stop-color="#f5d66b" stop-opacity="0"/></radialGradient></defs>
+  
+  <rect x="10" y="118" width="140" height="30" fill="url(#waterGrad)"/>
+  <path d="M30,118 C50,122 60,124 70,120" fill="none" stroke="#e6e1d3" stroke-opacity="0.45" stroke-width="1" stroke-linecap="round"/>
+  <path d="M90,126 C104,130 114,128 124,131" fill="none" stroke="#e6e1d3" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/>
+  <path d="M40,138 C54,140 70,141 80,139" fill="none" stroke="#e6e1d3" stroke-opacity="0.35" stroke-width="1" stroke-linecap="round"/>
+  <path d="M30,122 C30,136 54,146 80,146 C106,146 130,136 130,122" fill="none" stroke="#2a1f16" stroke-opacity="0.25" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="1 6"/>
+  <path d="M22,112 C22,84 48,62 80,62 C112,62 138,84 138,112 L128,112 C128,89 107,72 80,72 C53,72 32,89 32,112 Z" fill="url(#bridgeGrad)" stroke="#2a1f16" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M24,112 L24,118 M36,90 L36,96 M54,74 L54,80 M80,67 L80,73 M106,74 L106,80 M124,90 L124,96 M136,112 L136,118" stroke="#c9a27a" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M22,112 C22,84 48,62 80,62 C112,62 138,84 138,112" fill="none" stroke="#2a1f16" stroke-width="1.1"/>
+  <circle cx="118" cy="40" r="22" fill="url(#goldGlow)"/>
+  <circle cx="118" cy="38" r="11" fill="#f5d66b"/>
+  
+</svg>

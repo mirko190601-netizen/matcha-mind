@@ -1,0 +1,221 @@
+name: CI
+
+# Laeuft bei jedem Push auf main und bei manuellem Start. Keine Secrets,
+# nur Lesezugriff auf das Repo. Eingaben gelangen ausschliesslich ueber `env:`
+# in die Skripte (Schutz vor Skript-Injection).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      only_testing:
+        description: "Nur dieses Test-Target/diese Testmethode ausfuehren, z.B. MatchaMindUITests oder MatchaMindUITests/AppLaunchUITests/test_appStartsAndAllFourTabsOpen. Leer = alle Tests."
+        required: false
+        type: string
+      device:
+        description: "Welches Geraet testen?"
+        required: false
+        type: choice
+        default: "beide"
+        options:
+          - "beide"
+          - "iPhone 17 Pro"
+          - "iPad Pro 13-inch"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci
+  cancel-in-progress: true
+
+jobs:
+  # Sucht in der gesamten Git-History nach Schluesseln und Zugangsdaten.
+  # Ein Fund macht den Lauf rot.
+  secrets-scan:
+    name: Geheimnis-Scan (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: gitleaks laden und Pruefsumme verifizieren
+        run: |
+          DIR="$RUNNER_TEMP/gitleaks"
+          mkdir -p "$DIR"
+          cd "$DIR"
+          curl -sSfL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz"
+          echo "9991e0b2903da4c8f6122b5c3186448b927a5da4deef1fe45271c3793f4ee29c  gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+
+      - name: History scannen
+        run: |
+          "$RUNNER_TEMP/gitleaks/gitleaks" git --redact --no-banner --exit-code 1 .
+
+  # Reine Python-Checks brauchen keinen macOS-Runner. Schlaegt einer fehl,
+  # startet der macOS-Job gar nicht erst.
+  checks:
+    name: Generierte Dateien & Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      device_matrix: ${{ steps.device-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      # Bei manuellem Start kann ein einzelnes Geraet gewaehlt werden; bei
+      # `push` ist die Eingabe leer und es laufen beide.
+      - name: Geraete-Matrix bestimmen
+        id: device-matrix
+        env:
+          DEVICE: ${{ inputs.device }}
+        run: |
+          if [ "$DEVICE" = "iPhone 17 Pro" ]; then
+            MATRIX='["iPhone 17 Pro"]'
+          elif [ "$DEVICE" = "iPad Pro 13-inch" ]; then
+            MATRIX='["iPad Pro 13-inch"]'
+          else
+            MATRIX='["iPhone 17 Pro", "iPad Pro 13-inch"]'
+          fi
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+      - name: tokens.py erneut laufen lassen und auf Abweichung pruefen
+        run: |
+          python3 scripts/tokens.py
+          git diff --exit-code -- DesignSystem/Colors.xcassets DesignSystem/Tokens.swift
+
+      - name: Lokalisierung pruefen (check_localization.py)
+        run: python3 scripts/check_localization.py
+
+      - name: DEBUG-only Testzugaenge pruefen (check_debug_only.py)
+        run: python3 scripts/check_debug_only.py
+
+  build-test:
+    name: Build & Tests (${{ matrix.device_filter }})
+    needs: [secrets-scan, checks]
+    runs-on: macos-15
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        device_filter: ${{ fromJSON(needs.checks.outputs.device_matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      # macos-15 hat mehrere Xcode-26.x-Staende; gewaehlt wird der neueste.
+      - name: Xcode 26 auswaehlen
+        run: |
+          XCODE_PATH=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XCODE_PATH" ]; then
+            echo "Kein Xcode 26.* auf diesem Runner gefunden." >&2
+            ls /Applications | grep -i xcode >&2 || true
+            exit 1
+          fi
+          sudo xcode-select -s "$XCODE_PATH"
+          xcodebuild -version
+
+      - name: XcodeGen installieren
+        run: brew install xcodegen
+
+      - name: Projekt generieren (xcodegen generate)
+        run: xcodegen generate
+
+      # Der Simulator-Name enthaelt die Chip-Generation (z. B. "iPad Pro
+      # 13-inch (M5)"); darum den vollen Namen per simctl/jq auslesen.
+      - name: Simulator-Namen ermitteln
+        id: sim
+        env:
+          DEVICE_FILTER: ${{ matrix.device_filter }}
+        run: |
+          NAME=$(xcrun simctl list devices available -j \
+            | jq -r --arg f "$DEVICE_FILTER" \
+              '[.devices[][] | select(.name | startswith($f))][0].name // ""')
+          if [ -z "$NAME" ]; then
+            echo "Kein verfuegbarer Simulator fuer '$DEVICE_FILTER' gefunden." >&2
+            xcrun simctl list devices available >&2
+            exit 1
+          fi
+          echo "Gefunden: $NAME"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        env:
+          SIM_NAME: ${{ steps.sim.outputs.name }}
+        run: |
+          xcodebuild build \
+            -project MatchaMind.xcodeproj \
+            -scheme MatchaMind \
+            -destination "platform=iOS Simulator,name=$SIM_NAME" \
+            CODE_SIGNING_ALLOWED=NO
+
+      # `only_testing` gesetzt: nur dieses Target/diese Methode, der jeweils
+      # andere Schritt entfaellt. Leer: komplettes Target.
+      - name: Unit-Tests (MatchaMindTests)
+        if: inputs.only_testing == '' || startsWith(inputs.only_testing, 'MatchaMindTests')
+        env:
+          SIM_NAME: ${{ steps.sim.outputs.name }}
+          ONLY_TESTING: ${{ inputs.only_testing }}
+        run: |
+          TARGET="${ONLY_TESTING:-MatchaMindTests}"
+          xcodebuild test \
+            -project MatchaMind.xcodeproj \
+            -scheme MatchaMind \
+            -only-testing:"$TARGET" \
+            -destination "platform=iOS Simulator,name=$SIM_NAME" \
+            -resultBundlePath UnitResults.xcresult
+
+      - name: UI-Tests (MatchaMindUITests)
+        if: inputs.only_testing == '' || startsWith(inputs.only_testing, 'MatchaMindUITests')
+        env:
+          SIM_NAME: ${{ steps.sim.outputs.name }}
+          ONLY_TESTING: ${{ inputs.only_testing }}
+        run: |
+          TARGET="${ONLY_TESTING:-MatchaMindUITests}"
+          xcodebuild test \
+            -project MatchaMind.xcodeproj \
+            -scheme MatchaMind \
+            -only-testing:"$TARGET" \
+            -destination "platform=iOS Simulator,name=$SIM_NAME" \
+            -resultBundlePath UIResults.xcresult
+
+      # Nur Screenshots (PNG) und Fehlertexte (TXT) werden hochgeladen,
+      # nie die Ergebnis-Bundles, Apps oder Archive.
+      - name: Screenshots und Fehlertexte sammeln
+        if: always()
+        run: |
+          mkdir -p ci-artifacts export
+          for B in UnitResults.xcresult UIResults.xcresult; do
+            [ -d "$B" ] || continue
+            NAME="${B%.xcresult}"
+            xcrun xcresulttool export attachments --path "$B" --output-path "export/$NAME" || true
+            xcrun xcresulttool get test-results summary --path "$B" --format json \
+              | jq -r '.testFailures[]? | "\(.testIdentifierString // .testName): \(.failureText)"' \
+              > "ci-artifacts/$NAME-failures.txt" || true
+            [ -s "ci-artifacts/$NAME-failures.txt" ] || rm -f "ci-artifacts/$NAME-failures.txt"
+          done
+          find export -type f \( -iname '*.png' -o -iname '*.txt' \) -print0 \
+            | while IFS= read -r -d '' F; do
+                REL="${F#export/}"
+                mkdir -p "ci-artifacts/$(dirname "$REL")"
+                cp "$F" "ci-artifacts/$REL"
+              done
+
+      - name: Screenshots und Fehlertexte hochladen
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-${{ matrix.device_filter }}
+          path: ci-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7

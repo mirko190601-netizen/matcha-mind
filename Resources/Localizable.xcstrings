@@ -1,0 +1,1524 @@
+{
+  "sourceLanguage": "de",
+  "strings": {
+    "game.instruction.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        }
+      }
+    },
+    "game.instruction.skip": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Überspringen"
+          }
+        }
+      }
+    },
+    "game.instruction.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los geht's"
+          }
+        }
+      }
+    },
+    "game.instruction.startTrial": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proberunde starten"
+          }
+        }
+      }
+    },
+    "game.result.accuracyLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genauigkeit"
+          }
+        }
+      }
+    },
+    "game.result.continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        }
+      }
+    },
+    "game.result.dew": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld Tau"
+          }
+        }
+      }
+    },
+    "game.result.hitsLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treffer"
+          }
+        }
+      }
+    },
+    "game.result.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runde geschafft"
+          }
+        }
+      }
+    },
+    "game.rules.continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiterspielen"
+          }
+        }
+      }
+    },
+    "game.rules.openInstructions": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganze Anleitung ansehen"
+          }
+        }
+      }
+    },
+    "game.rules.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurz erklärt"
+          }
+        }
+      }
+    },
+    "illustration.fox.sitting": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuchs, sitzend"
+          }
+        }
+      }
+    },
+    "illustration.fox.sleeping": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuchs, schlafend"
+          }
+        }
+      }
+    },
+    "illustration.fox.trotting": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuchs, schnürend"
+          }
+        }
+      }
+    },
+    "illustration.crane.standing": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kranich, stehend"
+          }
+        }
+      }
+    },
+    "illustration.crane.landing": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kranich, landend"
+          }
+        }
+      }
+    },
+    "illustration.koi.kohaku": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koi, weiß-rot (Kohaku)"
+          }
+        }
+      }
+    },
+    "illustration.koi.showa": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koi, schwarz-weiß-rot (Showa)"
+          }
+        }
+      }
+    },
+    "illustration.koi.gold": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koi, golden"
+          }
+        }
+      }
+    },
+    "illustration.butterfly.lavender": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schmetterling, lavendelfarben"
+          }
+        }
+      }
+    },
+    "illustration.butterfly.blossom": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schmetterling, kirschblütenrosa"
+          }
+        }
+      }
+    },
+    "illustration.butterfly.gold": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schmetterling, goldgelb"
+          }
+        }
+      }
+    },
+    "illustration.creature.firefly": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glühwürmchen"
+          }
+        }
+      }
+    },
+    "illustration.creature.moth": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falter"
+          }
+        }
+      }
+    },
+    "illustration.creature.bee": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biene"
+          }
+        }
+      }
+    },
+    "illustration.creature.dragonfly": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libelle"
+          }
+        }
+      }
+    },
+    "placeholder.garden.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier wächst bald dein Garten."
+          }
+        }
+      }
+    },
+    "placeholder.games.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier warten bald deine Spiele."
+          }
+        }
+      }
+    },
+    "placeholder.history.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier siehst du bald deinen Verlauf."
+          }
+        }
+      }
+    },
+    "placeholder.profile.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier findest du bald dein Profil."
+          }
+        }
+      }
+    },
+    "tab.games.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spiele"
+          }
+        }
+      }
+    },
+    "tab.garden.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garten"
+          }
+        }
+      }
+    },
+    "tab.history.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf"
+          }
+        }
+      }
+    },
+    "tab.profile.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
+          }
+        }
+      }
+    },
+    "illustration.garden.teahouse": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teehaus"
+          }
+        }
+      }
+    },
+    "illustration.garden.stoneLantern": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steinlaterne"
+          }
+        }
+      }
+    },
+    "illustration.garden.moonBridge": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mondbrücke"
+          }
+        }
+      }
+    },
+    "illustration.garden.bamboo": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bambus"
+          }
+        }
+      }
+    },
+    "illustration.garden.cherryTree": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirschbaum"
+          }
+        }
+      }
+    },
+    "illustration.garden.pond": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teich"
+          }
+        }
+      }
+    },
+    "illustration.garden.steppingStones": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trittsteine"
+          }
+        }
+      }
+    },
+    "illustration.garden.bonsai": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonsai"
+          }
+        }
+      }
+    },
+    "illustration.garden.teaBowlSencha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teeschale, Sencha"
+          }
+        }
+      }
+    },
+    "illustration.garden.teaBowlOolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teeschale, Oolong"
+          }
+        }
+      }
+    },
+    "illustration.garden.teaBowlMatcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teeschale, Matcha"
+          }
+        }
+      }
+    },
+    "garden.locked.oolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Oolong"
+          }
+        }
+      }
+    },
+    "garden.locked.matcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Matcha"
+          }
+        }
+      }
+    },
+    "garden.visit.fox": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Fuchs schaut vorbei"
+          }
+        }
+      }
+    },
+    "garden.visit.crane": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Kranich schaut vorbei"
+          }
+        }
+      }
+    },
+    "garden.visit.butterfly": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Schmetterling schaut vorbei"
+          }
+        }
+      }
+    },
+    "game.teapotRow.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teekannen-Reihe"
+          }
+        }
+      }
+    },
+    "game.teapotRow.position": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kanne %lld"
+          }
+        }
+      }
+    },
+    "game.teapotRow.rule1": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schau dir die aufleuchtende Reihe genau an."
+          }
+        }
+      }
+    },
+    "game.teapotRow.rule2": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe sie danach in der richtigen Reihenfolge nach."
+          }
+        }
+      }
+    },
+    "game.teapotRow.rule3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Matcha: rückwärts, von der letzten Kanne zur ersten."
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merk dir die Reihe"
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page1.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein paar Teekannen leuchten kurz nacheinander auf. Schau genau hin, in welcher Reihenfolge."
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipp sie nach"
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page2.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe die Kannen in der gezeigten Reihenfolge an. Ab der Matcha-Stufe geht es rückwärts, von der letzten zur ersten."
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immer dein Tempo"
+          }
+        }
+      }
+    },
+    "game.teapotRow.instruction.page3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du hast so lange Zeit, wie du brauchst. Nach ein paar guten Runden wird die Reihe länger."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glühwürmchen am Teich"
+          }
+        }
+      }
+    },
+    "game.fireflyPond.rule1": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe nur Glühwürmchen in der Zielfarbe an."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.rule2": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falter und andere Farben lässt du einfach vorbeiziehen."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.rule3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Matcha: Die Zielfarbe kann mitten in der Runde wechseln."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur eine Farbe zählt"
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page1.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am Teich blinken Glühwürmchen und Falter auf. Du suchst dir nur eine bestimmte Farbe aus."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipp nur das Richtige"
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page2.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe, sobald du die Zielfarbe siehst. Falter und andere Farben lässt du einfach vorbeiziehen."
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleib wach"
+          }
+        }
+      }
+    },
+    "game.fireflyPond.instruction.page3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab der Matcha-Stufe wechselt die Zielfarbe mitten in der Runde. Schau immer wieder genau hin."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Mosaik-Beet"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.rule1": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede Reihe zeigt jede Pflanze genau einmal."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.rule2": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede Spalte zeigt jede Pflanze genau einmal."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.rule3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manche Pflanzen mögen sich nicht und dürfen nie direkt nebeneinander stehen."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.rule4": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe ein leeres Feld an, um eine Pflanze zu setzen oder zu wechseln."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Beet braucht Ordnung"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page1.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In jedem Beet gibt es feste Plätze für Pflanzen. Einige stehen schon da, die leeren Felder füllst du aus."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihe und Spalte zählen"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page2.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede Reihe und jede Spalte zeigt jede Pflanzenart genau einmal - nie doppelt."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nachbarn beachten"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.instruction.page3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manche Pflanzen vertragen sich nicht nebeneinander. Finde die eine Lösung, die zu allen Regeln passt."
+          }
+        }
+      }
+    },
+    "game.mosaicBed.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hinweis"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.cellPosition": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feld Reihe %lld, Spalte %lld"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.leaf": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blatt"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.drop": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tropfen"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonne"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.star": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stern"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mond"
+          }
+        }
+      }
+    },
+    "game.mosaicBed.plant.flame": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flamme"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teeblätter sortieren"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.rule1": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortiere die Teeblatt-Karte zur passenden Ablage."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.rule2": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach ein paar richtigen Zuordnungen in Folge ändert sich die Regel."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.rule3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Oolong kommt der Wechsel ohne Vorwarnung."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.rule4": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Matcha zählen zwei Eigenschaften gleichzeitig."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finde das passende Muster"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page1.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedes Teeblatt hat eine Farbe, eine Form und eine Anzahl. Du legst es zu der Ablage, die gerade passt."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Regel kann wechseln"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page2.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach ein paar richtigen Zuordnungen gilt plötzlich eine andere Eigenschaft. Achte auf deine Rückmeldung."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleib flexibel"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.instruction.page3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Oolong kommt der Wechsel ohne Vorwarnung, ab Matcha zählen sogar zwei Eigenschaften gleichzeitig."
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.ruleChanging": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Regel ändert sich gleich!"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.ruleChangeContinue": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.pile": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ablage %lld"
+          }
+        }
+      }
+    },
+    "game.teaLeafSort.card": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teeblatt-Karte, %lld Stück"
+          }
+        }
+      }
+    },
+    "game.bambooMath.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bambus-Rechnen"
+          }
+        }
+      }
+    },
+    "game.bambooMath.rule1": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löse die ganze Rechenkette im Kopf."
+          }
+        }
+      }
+    },
+    "game.bambooMath.rule2": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe dein Ergebnis über das Zahlenpad ein."
+          }
+        }
+      }
+    },
+    "game.bambooMath.rule3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestätige mit dem Prüfen-Knopf – dann kommt die nächste Kette."
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechenketten lösen"
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page1.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du siehst eine ganze Rechenkette auf einmal, zum Beispiel 12 + 5 − 3. Rechne sie im Kopf von links nach rechts durch."
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antwort eintippen"
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page2.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe dein Endergebnis über das Zahlenpad ein und bestätige mit dem Prüfen-Knopf."
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immer eine neue Kette"
+          }
+        }
+      }
+    },
+    "game.bambooMath.instruction.page3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach jeder Antwort kommt sofort die nächste Kette – so lange, bis die Runde vorbei ist."
+          }
+        }
+      }
+    },
+    "game.bambooMath.operator.add": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "plus"
+          }
+        }
+      }
+    },
+    "game.bambooMath.operator.subtract": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minus"
+          }
+        }
+      }
+    },
+    "game.bambooMath.operator.multiply": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mal"
+          }
+        }
+      }
+    },
+    "game.bambooMath.operator.divide": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "geteilt durch"
+          }
+        }
+      }
+    },
+    "game.bambooMath.answerPending": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "noch keine Antwort"
+          }
+        }
+      }
+    },
+    "game.bambooMath.submit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen"
+          }
+        }
+      }
+    },
+    "game.bambooMath.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
+          }
+        }
+      }
+    },
+    "game.locked.oolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Oolong"
+          }
+        }
+      }
+    },
+    "game.locked.matcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Matcha"
+          }
+        }
+      }
+    },
+    "game.teaCeremonyEcho.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teezeremonie-Echo"
+          }
+        }
+      }
+    },
+    "game.lanternColorWord.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laternen-Farbwort"
+          }
+        }
+      }
+    },
+    "game.stoneLantern.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Steinlaterne"
+          }
+        }
+      }
+    },
+    "game.gardenPathPlanner.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gartenpfad-Planer"
+          }
+        }
+      }
+    },
+    "game.wordGarden.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wortgarten"
+          }
+        }
+      }
+    },
+    "game.moonBridge.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mondbrücke"
+          }
+        }
+      }
+    },
+    "game.masterMosaic.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meister-Mosaik"
+          }
+        }
+      }
+    },
+    "game.koiSwarm.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koi-Schwarm"
+          }
+        }
+      }
+    },
+    "game.gardenerPattern.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gärtner-Muster"
+          }
+        }
+      }
+    },
+    "games.section.sencha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sencha"
+          }
+        }
+      }
+    },
+    "games.section.oolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oolong"
+          }
+        }
+      }
+    },
+    "games.section.matcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matcha"
+          }
+        }
+      }
+    },
+    "games.locked.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch gesperrt"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

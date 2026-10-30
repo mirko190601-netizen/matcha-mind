@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs><linearGradient id="bowlGrad" x1="20%" y1="8%" x2="85%" y2="95%"><stop offset="0%" stop-color="#abcca1"/><stop offset="55%" stop-color="#8fbb82"/><stop offset="100%" stop-color="#718c62"/></linearGradient><radialGradient id="goldGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f5d66b" stop-opacity="0.6"/><stop offset="100%" stop-color="#f5d66b" stop-opacity="0"/></radialGradient></defs>
+  
+  <ellipse cx="80" cy="128" rx="34" ry="7" fill="#2a1f16" fill-opacity="0.22"/>
+  <path d="M40,96 C40,92 120,92 120,96 L112,120 C104,128 56,128 48,120 Z" fill="url(#bowlGrad)" stroke="#2a1f16" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M48,120 C56,128 104,128 112,120" fill="none" stroke="#2a1f16" stroke-width="0.9" stroke-opacity="0.4"/>
+  <ellipse cx="80" cy="96" rx="40" ry="7" fill="#6c845c" stroke="#2a1f16" stroke-width="1"/>
+  <path d="M46,94 C56,98 104,98 114,94" fill="none" stroke="#b6d3ae" stroke-width="1" stroke-opacity="0.6" stroke-linecap="round"/>
+  <rect x="68" y="128" width="24" height="6" rx="2" fill="#c9a27a" stroke="#2a1f16" stroke-width="0.8"/>
+  <circle cx="100" cy="88" r="18" fill="url(#goldGlow)"/>
+  
+</svg>

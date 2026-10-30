@@ -1,0 +1,114 @@
+name: MatchaMind
+options:
+  bundleIdPrefix: de.matchamind
+  deploymentTarget:
+    iOS: "26.0"
+  minimumXcodeGenVersion: "2.38.0"
+
+configFiles:
+  Debug: Config/Secrets.example.xcconfig
+  Release: Config/Release.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_UPCOMING_FEATURE_STRICT_CONCURRENCY: YES
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    ENABLE_PREVIEWS: YES
+
+targets:
+  MatchaMind:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: App
+      - path: DesignSystem
+      - path: Illustration
+      - path: Games
+      # String Catalogs (Xcode 15+). XcodeGen kennt keinen eigenen
+      # Target-Schluessel "resources" (geprueft im XcodeGen-Quellcode,
+      # Sources/ProjectSpec/Target.swift: nur "sources" wird geparst) -
+      # Dateien gehoeren daher unter "sources", buildPhase "resources"
+      # kopiert sie ins App-Bundle. "knownRegions" muss nicht separat in
+      # den Projekt-Optionen gesetzt werden: XcodeGen liest die in den
+      # .xcstrings-Dateien enthaltenen Sprachen automatisch aus
+      # (Sources/XcodeGenKit/SourceGenerator.swift, stringCatalogsLocales).
+      - path: Resources/Localizable.xcstrings
+        buildPhase: resources
+      - path: Resources/InfoPlist.xcstrings
+        buildPhase: resources
+      - path: Resources/Fonts
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.matchamind.app
+        PRODUCT_NAME: MatchaMind
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Matcha Mind
+        CFBundleDevelopmentRegion: de
+        CFBundleLocalizations:
+          - de
+          - en
+          - fr
+        ITSAppUsesNonExemptEncryption: NO
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIAppFonts:
+          - ZenMaruGothic-Bold.ttf
+          - Nunito-Regular.ttf
+          - Nunito-SemiBold.ttf
+          - Nunito-Bold.ttf
+          - Nunito-ExtraBold.ttf
+
+  MatchaMindTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Tests/Unit
+    dependencies:
+      - target: MatchaMind
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.matchamind.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+  MatchaMindUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Tests/UI
+    dependencies:
+      - target: MatchaMind
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.matchamind.uitests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  MatchaMind:
+    build:
+      targets:
+        MatchaMind: all
+        MatchaMindTests: [test]
+        MatchaMindUITests: [test]
+    test:
+      targets:
+        - MatchaMindTests
+        - MatchaMindUITests

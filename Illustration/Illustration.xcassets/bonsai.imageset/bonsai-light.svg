@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs><linearGradient id="potGrad" x1="15%" y1="5%" x2="90%" y2="100%"><stop offset="0%" stop-color="#977b64"/><stop offset="55%" stop-color="#7a5638"/><stop offset="100%" stop-color="#704f35"/></linearGradient><linearGradient id="foliageGrad" x1="20%" y1="8%" x2="85%" y2="95%"><stop offset="0%" stop-color="#bfd5b7"/><stop offset="55%" stop-color="#a9c79f"/><stop offset="100%" stop-color="#8ead89"/></linearGradient><radialGradient id="goldGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e2b84f" stop-opacity="0.6"/><stop offset="100%" stop-color="#e2b84f" stop-opacity="0"/></radialGradient></defs>
+  
+  <ellipse cx="80" cy="148" rx="36" ry="7" fill="#5c4330" fill-opacity="0.16"/>
+  <path d="M48,140 L52,116 L108,116 L112,140 Z" fill="url(#potGrad)" stroke="#5c4330" stroke-width="1.1" stroke-linejoin="round"/>
+  <rect x="50" y="112" width="60" height="6" rx="2" fill="#a9784f" stroke="#5c4330" stroke-width="0.9"/>
+  <path d="M78,116 C76,100 90,92 84,78 C80,68 72,64 74,52" fill="none" stroke="#5c4330" stroke-width="7" stroke-linecap="round"/>
+  <path d="M78,116 C76,100 90,92 84,78 C80,68 72,64 74,52" fill="none" stroke="#7a5638" stroke-width="5" stroke-linecap="round"/>
+  <path d="M82,86 C90,82 96,80 102,76" fill="none" stroke="#7a5638" stroke-width="4" stroke-linecap="round"/>
+  
+  <ellipse cx="74" cy="48" rx="26" ry="12" fill="url(#foliageGrad)" stroke="#5c4330" stroke-width="1"/>
+  <ellipse cx="100" cy="72" rx="20" ry="10" fill="url(#foliageGrad)" stroke="#5c4330" stroke-width="1"/>
+  <ellipse cx="60" cy="74" rx="16" ry="8" fill="url(#foliageGrad)" stroke="#5c4330" stroke-width="1"/>
+  
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><linearGradient id="goldGrad" x1="20%" y1="10%" x2="85%" y2="90%"><stop offset="0%" stop-color="#eccf89"/><stop offset="55%" stop-color="#e2b84f"/><stop offset="100%" stop-color="#aa8a3b"/></linearGradient></defs>
+  <ellipse cx="30" cy="50" rx="8" ry="2" fill="#5c4330" fill-opacity="0.12"/>
+  <ellipse cx="23" cy="20" rx="8" ry="4.5" fill="#f3f0e6" fill-opacity="0.45" stroke="#5c4330" stroke-opacity="0.3" stroke-width="0.5" transform="rotate(-15 23 20)"/>
+  <ellipse cx="37" cy="20" rx="8" ry="4.5" fill="#f3f0e6" fill-opacity="0.45" stroke="#5c4330" stroke-opacity="0.3" stroke-width="0.5" transform="rotate(15 37 20)"/>
+  <path d="M24,28 C21,30 19,33 19,36" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M36,28 C39,30 41,33 41,36" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M25,33 C22,35 20,38 20,41" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M35,33 C38,35 40,38 40,41" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+  <ellipse cx="30" cy="34" rx="7.5" ry="9" fill="url(#goldGrad)" stroke="#5c4330" stroke-width="0.9"/>
+  <path d="M22,28 C26,26 34,26 38,28 C36,31 24,31 22,28 Z" fill="#5c4330"/>
+  <path d="M21,38 C26,41 34,41 39,38 C37,35 23,35 21,38 Z" fill="#5c4330"/>
+  <path d="M30,43 C29,45 29,47 30,48 C31,47 31,45 30,43 Z" fill="#5c4330"/>
+  <ellipse cx="30" cy="20" rx="5" ry="4.5" fill="url(#goldGrad)" stroke="#5c4330" stroke-width="0.9"/>
+  <circle cx="30" cy="13" r="3.6" fill="#5c4330"/>
+  <path d="M27,11 C25,8 23,6 20,5" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M33,11 C35,8 37,6 40,5" fill="none" stroke="#5c4330" stroke-width="0.8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,4 @@
+// Release: Beispielwerte als Basis, echte Werte nur wenn der Release-Workflow
+// Config/Secrets.xcconfig erzeugt hat (optionaler Include).
+#include "Secrets.example.xcconfig"
+#include? "Secrets.xcconfig"

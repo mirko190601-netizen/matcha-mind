@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs><linearGradient id="trunkGrad" x1="15%" y1="5%" x2="90%" y2="100%"><stop offset="0%" stop-color="#d5b697"/><stop offset="55%" stop-color="#c9a27a"/><stop offset="100%" stop-color="#917457"/></linearGradient><radialGradient id="goldGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f5d66b" stop-opacity="0.6"/><stop offset="100%" stop-color="#f5d66b" stop-opacity="0"/></radialGradient></defs>
+  
+  <ellipse cx="80" cy="150" rx="44" ry="7" fill="#2a1f16" fill-opacity="0.22"/>
+  <path d="M78,150 C76,120 74,96 80,70 C82,96 84,120 82,150 Z" fill="url(#trunkGrad)" stroke="#2a1f16" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M80,96 C68,88 58,82 48,78" fill="none" stroke="#c9a27a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M80,88 C94,80 104,74 114,68" fill="none" stroke="#c9a27a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M79,120 C76,116 76,112 78,108" fill="none" stroke="#2a1f16" stroke-opacity="0.35" stroke-width="0.9" stroke-linecap="round"/>
+  <circle cx="80" cy="42" r="34" fill="url(#goldGlow)"/>
+  <circle cx="50" cy="36" r="10" fill="#f2c5cf" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="66" cy="28" r="11" fill="#efb7c3" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="84" cy="24" r="12" fill="#be9198" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="102" cy="30" r="10" fill="#efb7c3" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="116" cy="42" r="9" fill="#f2c5cf" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="40" cy="50" r="9" fill="#efb7c3" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="58" cy="46" r="8" fill="#be9198" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="96" cy="46" r="9" fill="#f2c5cf" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="112" cy="56" r="8" fill="#efb7c3" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="74" cy="40" r="10" fill="#f2c5cf" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="90" cy="40" r="9" fill="#be9198" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="60" cy="60" r="7" fill="#efb7c3" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="102" cy="62" r="7" fill="#f2c5cf" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  <circle cx="78" cy="56" r="8" fill="#be9198" stroke="#2a1f16" stroke-width="0.5" stroke-opacity="0.35"/>
+  
+</svg>

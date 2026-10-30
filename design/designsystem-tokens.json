@@ -1,0 +1,462 @@
+{
+  "name": "Matcha Mind",
+  "version": 2,
+  "color": {
+    "themes": [
+      {
+        "id": "light",
+        "name": "Tag (Teegarten)"
+      },
+      {
+        "id": "dark",
+        "name": "Abend (Abendgarten)"
+      }
+    ],
+    "tokens": [
+      {
+        "name": "bg-garden",
+        "value": {
+          "light": "#e3ead8",
+          "dark": "#17302e"
+        },
+        "usage": "Haupt-Hintergrund: Garten, Spielebibliothek, Logik- und Fokus-Spiele."
+      },
+      {
+        "name": "bg-tea",
+        "value": {
+          "light": "#f4eddc",
+          "dark": "#1f2a26"
+        },
+        "usage": "Warmer Hintergrund: Teepause, Einstellungen, Spielanleitung, Teezeremonie-Spiele."
+      },
+      {
+        "name": "bg-band",
+        "value": {
+          "light": "#d3e0c8",
+          "dark": "#1d3a37"
+        },
+        "usage": "Oberer Szenen-Streifen hinter Illustrationen auf bg-garden."
+      },
+      {
+        "name": "glass-fill",
+        "value": {
+          "light": "#ffffff99",
+          "dark": "#ffffff1f"
+        },
+        "usage": "Nur Fallback-Füllung für Glas-Elemente in Mockups; in der App übernimmt .glassEffect() diese Rolle."
+      },
+      {
+        "name": "glass-stroke",
+        "value": {
+          "light": "#ffffffd9",
+          "dark": "#ffffff40"
+        },
+        "usage": "1-px-Kante an Glas-Karten und Glas-Buttons."
+      },
+      {
+        "name": "ink",
+        "value": {
+          "light": "#263528",
+          "dark": "#f4f7ef"
+        },
+        "usage": "Überschriften und App-Name. Auf bg-garden, bg-tea und Glas."
+      },
+      {
+        "name": "text",
+        "value": {
+          "light": "#2b3a2e",
+          "dark": "#eef3e8"
+        },
+        "usage": "Fließtext, Button-Text auf Glas, Spielnamen."
+      },
+      {
+        "name": "text-muted",
+        "value": {
+          "light": "#4a5a4d",
+          "dark": "#c8d6cb"
+        },
+        "usage": "Nebentexte, Untertitel, Bereichsangaben. Erfüllt 4.5:1 auf bg-garden und bg-tea."
+      },
+      {
+        "name": "matcha-600",
+        "value": {
+          "light": "#4e7154",
+          "dark": "#8fbb82"
+        },
+        "usage": "Primärfarbe: Haupt-Button, aktive Navigation, Fortschritt, Schalter an. Text darauf: on-primary."
+      },
+      {
+        "name": "on-primary",
+        "value": {
+          "light": "#ffffff",
+          "dark": "#10221a"
+        },
+        "usage": "Text und Icons auf matcha-600."
+      },
+      {
+        "name": "matcha-300",
+        "value": {
+          "light": "#a9c79f",
+          "dark": "#5e8263"
+        },
+        "usage": "Blätter, Stufen-Icons, ruhige Akzentflächen. Nie für Text."
+      },
+      {
+        "name": "lavender-500",
+        "value": {
+          "light": "#8a74c2",
+          "dark": "#b9a9dd"
+        },
+        "usage": "Auswahl und Neues: aktive Karte (2-px-Rand), ausgewähltes Feld, Abzeichen „Neu“. Höchstens ein Element pro Screen."
+      },
+      {
+        "name": "lavender-100",
+        "value": {
+          "light": "#e6def3",
+          "dark": "#2e2745"
+        },
+        "usage": "Fläche für Abzeichen und Nummern-Punkte. Text darauf: lavender-700."
+      },
+      {
+        "name": "lavender-700",
+        "value": {
+          "light": "#4b3a7e",
+          "dark": "#ddd3f5"
+        },
+        "usage": "Text auf lavender-100."
+      },
+      {
+        "name": "tau-400",
+        "value": {
+          "light": "#8eb5c4",
+          "dark": "#8eb5c4"
+        },
+        "usage": "Tautropfen: Fortschrittsbalken, Tropfen-Icons, Belohnung. Nie für Text."
+      },
+      {
+        "name": "tau-700",
+        "value": {
+          "light": "#3f6b78",
+          "dark": "#a9d0dc"
+        },
+        "usage": "Text für Tautropfen-Mengen („+12 Tau“)."
+      },
+      {
+        "name": "wood-500",
+        "value": {
+          "light": "#a9784f",
+          "dark": "#a9784f"
+        },
+        "usage": "Holzrahmen von Spielbrettern, Teehaus-Elemente."
+      },
+      {
+        "name": "wood-700",
+        "value": {
+          "light": "#7a5638",
+          "dark": "#c9a27a"
+        },
+        "usage": "Dunkle Holzdetails, Icons auf Holz-Flächen."
+      },
+      {
+        "name": "gold-300",
+        "value": {
+          "light": "#e2b84f",
+          "dark": "#f5d66b"
+        },
+        "usage": "Leuchtende Ziele (Glühwürmchen, Laternen) und Treffer-Highlights. Nie für Text auf hellem Grund."
+      },
+      {
+        "name": "blossom-300",
+        "value": {
+          "light": "#efb7c3",
+          "dark": "#efb7c3"
+        },
+        "usage": "Kirschblüten und seltene Belohnungen."
+      },
+      {
+        "name": "fox-500",
+        "value": {
+          "light": "#c8733f",
+          "dark": "#d98a55"
+        },
+        "usage": "Neu v2: Fell des Fuchses (Grundton; Tonstufen davon ableiten). Nie für Text."
+      },
+      {
+        "name": "fox-200",
+        "value": {
+          "light": "#f1dcc4",
+          "dark": "#e3c9ab"
+        },
+        "usage": "Neu v2: heller Brustlatz, Schwanzspitze, Fell-Lichter. Nie für Text."
+      },
+      {
+        "name": "koi-500",
+        "value": {
+          "light": "#e8834a",
+          "dark": "#e8834a"
+        },
+        "usage": "Neu v2: Koi-Zeichnung, warme Akzente im Teich. Nie für Text."
+      },
+      {
+        "name": "koi-white",
+        "value": {
+          "light": "#f3f0e6",
+          "dark": "#e6e1d3"
+        },
+        "usage": "Neu v2: helle Koi-Grundfarbe, Kranich-Gefieder."
+      },
+      {
+        "name": "line-art",
+        "value": {
+          "light": "#5c4330",
+          "dark": "#2a1f16"
+        },
+        "usage": "Neu v2: feine Konturen und Zeichenstriche in Illustrationen (0,75–1,5 pt). Nie reines Schwarz, nie für Text."
+      },
+      {
+        "name": "level-sencha",
+        "value": {
+          "light": "#a9c79f",
+          "dark": "#6f9a66"
+        },
+        "usage": "Stufe Sencha (leicht): Stufen-Punkt und Abzeichen-Akzent."
+      },
+      {
+        "name": "level-oolong",
+        "value": {
+          "light": "#c9a27a",
+          "dark": "#c9a27a"
+        },
+        "usage": "Stufe Oolong (mittel): Stufen-Punkt und Abzeichen-Akzent."
+      },
+      {
+        "name": "level-matcha",
+        "value": {
+          "light": "#4e7154",
+          "dark": "#8fbb82"
+        },
+        "usage": "Stufe Matcha (schwer): Stufen-Punkt und Abzeichen-Akzent."
+      },
+      {
+        "name": "feedback-good",
+        "value": {
+          "light": "#2f5a37",
+          "dark": "#b5dba8"
+        },
+        "usage": "Text bei richtiger Antwort („Richtig!“)."
+      },
+      {
+        "name": "feedback-gentle",
+        "value": {
+          "light": "#6b5530",
+          "dark": "#e8d3a8"
+        },
+        "usage": "Text bei falscher Antwort („Fast – nochmal?“). Ersetzt Rot: Fehler werden nie rot markiert."
+      }
+    ]
+  },
+  "type": {
+    "fonts": [],
+    "families": {
+      "display": "\"Zen Maru Gothic\", ui-rounded, system-ui, serif",
+      "body": "Nunito, ui-rounded, system-ui, sans-serif"
+    },
+    "groups": [
+      {
+        "name": "Überschriften",
+        "family": "display",
+        "styles": [
+          {
+            "name": "display",
+            "fontSize": "30px",
+            "lineHeight": "36px",
+            "fontWeight": 700,
+            "sample": "Dein Teegarten",
+            "usage": "Screen-Titel auf Startseite. iOS: relativeTo .largeTitle."
+          },
+          {
+            "name": "title",
+            "fontSize": "24px",
+            "lineHeight": "30px",
+            "fontWeight": 700,
+            "sample": "Teezeremonie-Echo",
+            "usage": "Titel von Spielen und Unterseiten. iOS: relativeTo .title."
+          },
+          {
+            "name": "headline",
+            "fontSize": "20px",
+            "lineHeight": "26px",
+            "fontWeight": 700,
+            "sample": "Deine Teepause wartet",
+            "usage": "Überschrift in Karten und Fenstern. iOS: relativeTo .title3."
+          }
+        ]
+      },
+      {
+        "name": "Text",
+        "family": "body",
+        "styles": [
+          {
+            "name": "body",
+            "fontSize": "16px",
+            "lineHeight": "22px",
+            "fontWeight": 600,
+            "sample": "Tippe nur die goldenen Glühwürmchen.",
+            "usage": "Anleitungen, Regeln, Fließtext. iOS: relativeTo .body."
+          },
+          {
+            "name": "button",
+            "fontSize": "17px",
+            "lineHeight": "22px",
+            "fontWeight": 800,
+            "sample": "Teepause starten",
+            "usage": "Beschriftung von Haupt-Buttons. iOS: relativeTo .headline."
+          },
+          {
+            "name": "callout",
+            "fontSize": "14px",
+            "lineHeight": "20px",
+            "fontWeight": 700,
+            "sample": "Tautropfen 62 / 100",
+            "usage": "Werte, Zähler, Hinweise in Karten. iOS: relativeTo .callout."
+          },
+          {
+            "name": "caption",
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "fontWeight": 400,
+            "sample": "Gedächtnis · geschafft",
+            "usage": "Untertitel und Nebeninfos. iOS: relativeTo .footnote."
+          },
+          {
+            "name": "label",
+            "fontSize": "12px",
+            "lineHeight": "16px",
+            "fontWeight": 800,
+            "sample": "NEU",
+            "usage": "Abzeichen, Tab-Beschriftungen. iOS: relativeTo .caption."
+          }
+        ]
+      }
+    ]
+  },
+  "spacing": {
+    "tokens": [
+      {
+        "name": "space-1",
+        "value": "4px",
+        "usage": "Abstand Icon zu Beschriftung."
+      },
+      {
+        "name": "space-2",
+        "value": "8px",
+        "usage": "Abstand zwischen Spielbrett-Feldern und Zeilen in Listen."
+      },
+      {
+        "name": "space-3",
+        "value": "12px",
+        "usage": "Abstand zwischen Karten."
+      },
+      {
+        "name": "space-4",
+        "value": "16px",
+        "usage": "Innenabstand kleiner Karten."
+      },
+      {
+        "name": "space-5",
+        "value": "20px",
+        "usage": "Seitenrand von Karten und Leisten."
+      },
+      {
+        "name": "space-6",
+        "value": "24px",
+        "usage": "Seitenrand von Text und Kopfzeile; Innenabstand großer Karten."
+      },
+      {
+        "name": "space-8",
+        "value": "32px",
+        "usage": "Abstand zwischen Abschnitten."
+      }
+    ]
+  },
+  "radius": {
+    "tokens": [
+      {
+        "name": "radius-sm",
+        "value": "12px",
+        "usage": "Spielbrett-Felder, kleine Kacheln."
+      },
+      {
+        "name": "radius-md",
+        "value": "16px",
+        "usage": "Listen-Kacheln, Hinweis-Chips."
+      },
+      {
+        "name": "radius-lg",
+        "value": "22px",
+        "usage": "Karten in Listen, Regeln-Fenster."
+      },
+      {
+        "name": "radius-xl",
+        "value": "28px",
+        "usage": "Hauptkarten, Spielanleitungs-Fenster, Tab-Leiste."
+      },
+      {
+        "name": "radius-pill",
+        "value": "999px",
+        "usage": "Buttons, Abzeichen, runde Glas-Buttons."
+      }
+    ]
+  },
+  "shadow": {
+    "tokens": [
+      {
+        "name": "shadow-card",
+        "value": {
+          "light": "0 10px 30px rgba(54, 74, 56, 0.12)",
+          "dark": "0 10px 30px rgba(0, 0, 0, 0.35)"
+        },
+        "usage": "Hauptkarten und Tab-Leiste. Nur ein Schatten-Level in der ganzen App."
+      }
+    ]
+  },
+  "size": {
+    "tokens": [
+      {
+        "name": "touch-min",
+        "value": "44px",
+        "usage": "Mindestgröße jedes tippbaren Elements."
+      },
+      {
+        "name": "button-height",
+        "value": "54px",
+        "usage": "Höhe von Haupt-Buttons."
+      },
+      {
+        "name": "help-button",
+        "value": "36px",
+        "usage": "Sichtbarer Kreis des ?-Regel-Buttons; Tippfläche bleibt 44px."
+      },
+      {
+        "name": "reading-max",
+        "value": "640px",
+        "usage": "Neu v2: maximale Breite von Lesespalten und Spielbrettern auf dem iPad."
+      },
+      {
+        "name": "glass-button-height",
+        "value": "50px",
+        "usage": "Höhe des Glas-Buttons (Nebenaktionen), siehe Komponenten-Tabelle."
+      },
+      {
+        "name": "icon-header",
+        "value": "20px",
+        "usage": "Icon-Größe im Kopfzeilen-Button (Komponenten-Tabelle nennt 18–20pt; oberes Ende gewählt)."
+      },
+      {
+        "name": "icon-help",
+        "value": "16px",
+        "usage": "Icon-Größe im Regel-Button (?); in der Komponenten-Tabelle nicht in pt benannt, proportional zum 36pt-Kreis gewählt."
+      }
+    ]
+  }
+}
