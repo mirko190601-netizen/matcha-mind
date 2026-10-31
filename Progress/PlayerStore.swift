@@ -80,8 +80,12 @@ final class PlayerStore {
     /// Manuelle Wahl: Zaehlung der aktiven Tage beginnt neu, ein
     /// aufgeschobenes Angebot entfaellt.
     func setLevel(_ newLevel: TeaLevel) {
+        // Ist die heutige Teepause schon erledigt (typisch beim
+        // Aufstiegs-Moment direkt nach dem Abschluss), zählt dieser Tag
+        // noch zur alten Stufe - die neue Stufe beginnt erst morgen.
+        let alreadyCountedToday = isTeaBreakCompletedToday
         profile.level = newLevel
-        profile.levelSinceDayKey = todayKey
+        profile.levelSinceDayKey = alreadyCountedToday ? tomorrowKey : todayKey
         profile.highestLevel = max(profile.highestLevel, newLevel)
         profile.promotionDeferredUntilActiveDays = nil
         save()
@@ -186,6 +190,11 @@ final class PlayerStore {
 
     private var todayKey: String {
         DayKey.string(for: clock.now(), calendar: calendar)
+    }
+
+    private var tomorrowKey: String {
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: clock.now()) ?? clock.now()
+        return DayKey.string(for: tomorrow, calendar: calendar)
     }
 
     private func allDayRecords() -> [DayRecord] {

@@ -137,6 +137,19 @@ final class PlayerStoreTests: XCTestCase {
         XCTAssertNil(store.pendingPromotion())
     }
 
+    func testPromotionOnSameDayAsTeaBreakDoesNotCountThatDayTwice() throws {
+        let clock = makeClock()
+        let store = try makeStore(clock: clock)
+        playDay(store)
+
+        store.acceptPromotion(to: .oolong)
+        XCTAssertEqual(store.activeDaysAtCurrentLevel, 0)
+
+        clock.advance(by: oneDay)
+        playDay(store)
+        XCTAssertEqual(store.activeDaysAtCurrentLevel, 1)
+    }
+
     func testManualLevelChangeResetsCountingButKeepsHighestLevel() throws {
         let clock = makeClock()
         let store = try makeStore(clock: clock)
