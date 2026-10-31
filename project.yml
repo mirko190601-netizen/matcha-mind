@@ -30,6 +30,7 @@ targets:
       - path: DesignSystem
       - path: Illustration
       - path: Games
+      - path: Progress
       # String Catalogs (Xcode 15+). XcodeGen kennt keinen eigenen
       # Target-Schluessel "resources" (geprueft im XcodeGen-Quellcode,
       # Sources/ProjectSpec/Target.swift: nur "sources" wird geparst) -

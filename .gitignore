@@ -23,3 +23,6 @@ DerivedData/
 Config/Secrets.xcconfig
 deploykey*
 build/
+*.pem
+*.key
+**/Secrets.xcconfig

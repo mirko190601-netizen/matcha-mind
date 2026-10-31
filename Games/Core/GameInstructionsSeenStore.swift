@@ -4,11 +4,10 @@
 // Anleitung in diesem App-Lauf schon mindestens einmal gesehen oder
 // übersprungen wurde.
 //
-// Reine Prozesslaufzeit-Markierung, bewusst OHNE Persistenz (kein
-// SwiftData/UserDefaults, siehe `FineLevel.swift` für dieselbe
-// Dokumentations-Konvention bei bewusst fehlender Persistenz): bei jedem
-// App-Neustart gilt jede Anleitung wieder als ungesehen. Echte, über
-// Neustarts hinweg gültige Persistenz folgt erst in Block B4.
+// Ohne `backing` reine Prozesslaufzeit-Markierung (Vorschauen, Unit-Tests):
+// bei jedem Neustart gilt jede Anleitung wieder als ungesehen. Block B4
+// setzt beim App-Start `backing` auf den `PlayerStore`; dann wird jede
+// Markierung zusätzlich dauerhaft gespeichert und überlebt Neustarts.
 //
 // `@MainActor` statt Actor/Lock: alle Zugriffe (Lesen beim Erzeugen einer
 // Spiel-View, Schreiben bei "Überspringen"/letzter Anleitungsseite)
@@ -21,14 +20,18 @@ import Foundation
 public enum GameInstructionsSeenStore {
     private static var seenGameIDs: Set<String> = []
 
+    /// Dauerhafter Speicher (beim App-Start gesetzt). `nil` = nur Laufzeit.
+    static var backing: PlayerStore?
+
     /// Ob die Anleitung für `gameID` in diesem App-Lauf schon mindestens
     /// einmal gesehen oder übersprungen wurde.
     public static func hasSeenInstructions(gameID: String) -> Bool {
-        seenGameIDs.contains(gameID)
+        seenGameIDs.contains(gameID) || (backing?.instructionsSeen(gameID: gameID) ?? false)
     }
 
     /// Markiert die Anleitung für `gameID` als gesehen.
     public static func markSeen(gameID: String) {
         seenGameIDs.insert(gameID)
+        backing?.markInstructionsSeen(gameID: gameID)
     }
 }

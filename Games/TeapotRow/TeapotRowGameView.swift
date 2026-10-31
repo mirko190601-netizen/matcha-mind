@@ -54,7 +54,11 @@ public struct TeapotRowGameView: View {
         self.onFinished = onFinished
         let range = TeapotRowGame().parameters[level]?.sequenceLengthRange ?? 3...5
         _fineLevelTracker = State(
-            initialValue: FineLevelTracker(lowerBound: range.lowerBound, upperBound: range.upperBound)
+            initialValue: FineLevelTracker(
+                lowerBound: range.lowerBound,
+                upperBound: range.upperBound,
+                startLevel: FineLevelStore.startLevel(gameID: TeapotRowGame().id)
+            )
         )
         _showInstructions = State(
             initialValue: !GameInstructionsSeenStore.hasSeenInstructions(gameID: TeapotRowGame().id)
@@ -225,6 +229,7 @@ public struct TeapotRowGameView: View {
         } else {
             fineLevelTracker.recordSuccess()
         }
+        FineLevelStore.save(gameID: game.id, level: fineLevelTracker.fineLevel)
 
         if session.elapsedPlayTime() >= roundDuration {
             session.finish(hits: hits, misses: misses, duration: session.elapsedPlayTime())
