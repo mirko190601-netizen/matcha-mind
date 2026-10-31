@@ -58,9 +58,10 @@ final class GardenLogicTests: XCTestCase {
     // MARK: - WeeklyGoal
 
     func testWeekKeyIsIsoWeekAcrossSundayMonday() {
-        // 2026-01-04 ist Sonntag (Woche 53 von 2025), 2026-01-05 Montag (Woche 1).
-        XCTAssertEqual(WeeklyGoal.weekKey(for: date(2026, 1, 4), calendar: calendar), "2025-W53")
-        XCTAssertEqual(WeeklyGoal.weekKey(for: date(2026, 1, 5), calendar: calendar), "2026-W01")
+        // Der 1. Januar 2026 ist ein Donnerstag: Woche 1 laeuft Mo 2025-12-29 bis So 2026-01-04.
+        XCTAssertEqual(WeeklyGoal.weekKey(for: date(2025, 12, 28), calendar: calendar), "2025-W52")
+        XCTAssertEqual(WeeklyGoal.weekKey(for: date(2026, 1, 4), calendar: calendar), "2026-W01")
+        XCTAssertEqual(WeeklyGoal.weekKey(for: date(2026, 1, 5), calendar: calendar), "2026-W02")
         XCTAssertEqual(WeeklyGoal.weekKey(for: date(2026, 10, 26), calendar: calendar), "2026-W44")
     }
 
