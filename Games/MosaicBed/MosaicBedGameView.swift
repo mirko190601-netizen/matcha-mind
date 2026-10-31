@@ -16,6 +16,7 @@ import SwiftUI
 public struct MosaicBedGameView: View {
     private let level: TeaLevel
     private let game = MosaicBedGame()
+    private let onResult: (GameResult) -> Void
     private let onFinished: () -> Void
 
     /// Zielspieldauer einer Runde (Abschnitt 6: "Runde 60-90 s"); bei
@@ -39,9 +40,16 @@ public struct MosaicBedGameView: View {
     /// - Parameters:
     ///   - level: aktuelle Tee-Stufe, bestimmt Rastergröße und Regeln
     ///     (`MosaicBedParameters`).
+    ///   - onResult: Aufruf genau einmal, sobald das Ergebnis der Runde feststeht
+    ///     (Fortschritt speichern).
     ///   - onFinished: Aufruf, sobald der Ergebnis-Screen bestätigt wird.
-    public init(level: TeaLevel, onFinished: @escaping () -> Void = {}) {
+    public init(
+        level: TeaLevel,
+        onResult: @escaping (GameResult) -> Void = { _ in },
+        onFinished: @escaping () -> Void = {}
+    ) {
         self.level = level
+        self.onResult = onResult
         self.onFinished = onFinished
         _showInstructions = State(
             initialValue: !GameInstructionsSeenStore.hasSeenInstructions(gameID: MosaicBedGame().id)
@@ -78,6 +86,12 @@ public struct MosaicBedGameView: View {
                 }
             }
             .padding(Space.space6)
+        }
+        // Genau einmal, sobald das Ergebnis feststeht (Uebergang nach `.finished`).
+        .onChange(of: session.state) { _, newState in
+            if case .finished(let result) = newState {
+                onResult(result)
+            }
         }
         .sheet(isPresented: $showInstructions) {
             GameInstructionSheet(

@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SOURCE_DIRS = ["App", "DesignSystem", "Illustration", "Games"]
+SOURCE_DIRS = ["App", "DesignSystem", "Illustration", "Games", "Progress", "Teepause", "Settings"]
 CATALOG_PATH = REPO_ROOT / "Resources" / "Localizable.xcstrings"
 
 # Matcht String(localized: "schluessel.name" ...). Der Schluessel steht immer

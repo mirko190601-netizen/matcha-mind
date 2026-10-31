@@ -1,6 +1,281 @@
 {
   "sourceLanguage": "de",
   "strings": {
+    "game.locked.soon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kommt bald"
+          }
+        }
+      }
+    },
+    "garden.teabreak.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teepause starten"
+          }
+        }
+      }
+    },
+    "garden.teabreak.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Teepause für heute ist getrunken. Im Spiele-Tab kannst du frei weiterspielen."
+          }
+        }
+      }
+    },
+    "teabreak.overview.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Teepause"
+          }
+        }
+      }
+    },
+    "teabreak.overview.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drei kurze Spiele, ganz in deinem Tempo."
+          }
+        }
+      }
+    },
+    "teabreak.overview.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los geht's"
+          }
+        }
+      }
+    },
+    "teabreak.overview.later": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Später"
+          }
+        }
+      }
+    },
+    "teabreak.finished.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teepause genossen"
+          }
+        }
+      }
+    },
+    "teabreak.finished.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Garten freut sich über deinen Besuch."
+          }
+        }
+      }
+    },
+    "teabreak.finished.back": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück in den Garten"
+          }
+        }
+      }
+    },
+    "promotion.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein neuer Bereich öffnet sich"
+          }
+        }
+      }
+    },
+    "promotion.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du hast dich gut eingespielt. Wenn du magst, geht es jetzt etwas weiter."
+          }
+        }
+      }
+    },
+    "promotion.area.oolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bambushain"
+          }
+        }
+      }
+    },
+    "promotion.area.matcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mondbrücke"
+          }
+        }
+      }
+    },
+    "promotion.newGames": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu dabei"
+          }
+        }
+      }
+    },
+    "promotion.accept.oolong": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter mit Oolong"
+          }
+        }
+      }
+    },
+    "promotion.accept.matcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter mit Matcha"
+          }
+        }
+      }
+    },
+    "promotion.defer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieber noch bleiben"
+          }
+        }
+      }
+    },
+    "level.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stufe"
+          }
+        }
+      }
+    },
+    "level.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst die Stufe jederzeit selbst wählen."
+          }
+        }
+      }
+    },
+    "level.sencha.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein sanfter Einstieg"
+          }
+        }
+      }
+    },
+    "level.oolong.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etwas mehr Abwechslung"
+          }
+        }
+      }
+    },
+    "level.matcha.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für alle, die es gern tiefer mögen"
+          }
+        }
+      }
+    },
+    "level.auto.toggle": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch aufsteigen"
+          }
+        }
+      }
+    },
+    "level.auto.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn du dich eingespielt hast, schlagen wir dir die nächste Stufe vor. Du entscheidest, ob du wechselst."
+          }
+        }
+      }
+    },
     "game.instruction.next": {
       "extractionState": "manual",
       "localizations": {

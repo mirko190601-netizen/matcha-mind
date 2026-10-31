@@ -22,6 +22,7 @@ import SwiftUI
 public struct FireflyPondGameView: View {
     private let level: TeaLevel
     private let game = FireflyPondGame()
+    private let onResult: (GameResult) -> Void
     private let onFinished: () -> Void
 
     /// Anzahl Objekte pro Runde; ergibt mit `displayDuration` +
@@ -51,11 +52,18 @@ public struct FireflyPondGameView: View {
     /// - Parameters:
     ///   - level: aktuelle Tee-Stufe, bestimmt Farben, Ablenkungsanteil und
     ///     ob die Zielfarbe mitten in der Runde wechselt (`FireflyPondParameters`).
+    ///   - onResult: Aufruf genau einmal, sobald das Ergebnis der Runde feststeht
+    ///     (Fortschritt speichern).
     ///   - onFinished: Aufruf, sobald der Ergebnis-Screen bestaetigt wird
     ///     (Rueckkehr zu Teepause/Bibliothek - Anbindung folgt in Block
     ///     B3 Aufgabe 4 / B4).
-    public init(level: TeaLevel, onFinished: @escaping () -> Void = {}) {
+    public init(
+        level: TeaLevel,
+        onResult: @escaping (GameResult) -> Void = { _ in },
+        onFinished: @escaping () -> Void = {}
+    ) {
         self.level = level
+        self.onResult = onResult
         self.onFinished = onFinished
         _showInstructions = State(
             initialValue: !GameInstructionsSeenStore.hasSeenInstructions(gameID: FireflyPondGame().id)
@@ -93,6 +101,12 @@ public struct FireflyPondGameView: View {
                 }
             }
             .padding(Space.space6)
+        }
+        // Genau einmal, sobald das Ergebnis feststeht (Uebergang nach `.finished`).
+        .onChange(of: session.state) { _, newState in
+            if case .finished(let result) = newState {
+                onResult(result)
+            }
         }
         .sheet(isPresented: $showInstructions) {
             GameInstructionSheet(

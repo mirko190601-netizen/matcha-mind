@@ -51,7 +51,7 @@ final class TeapotRowUITests: XCTestCase {
 
     private func launch(gameLevel: String? = nil) {
         app = XCUIApplication()
-        app.launchArguments += ["-uitest-date", "2026-01-15T08:00:00Z"]
+        app.launchArguments += ["-uitest-date", "2026-01-15T08:00:00Z", "-uitest-persona", "tea"]
         if let gameLevel {
             app.launchArguments += ["-uitest-game-level", gameLevel]
         }

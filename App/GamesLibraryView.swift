@@ -2,26 +2,28 @@
 // Spiele-Tab (MASTER-PROMPT.md, Block B3 Aufgabe 4): ersetzt
 // `GamesPlaceholderView`. Zeigt alle 14 Spiele aus `Games/Core/GameCatalog.swift`,
 // nach Stufe gruppiert (Sencha/Oolong/Matcha-Abschnitte). Gesperrte Spiele
-// (alles außer den 5 Sencha-Spielen, siehe `GameCatalogEntry.isUnlocked`)
-// zeigen einen Glas-Schloss-Chip analog zu `Illustration/GardenScene.swift`.
+// (noch nicht gebaut oder erst ab einer höheren Spielerstufe, siehe
+// `GameCatalog.isUnlocked(_:playerLevel:)`) zeigen einen Glas-Schloss-Chip
+// analog zu `Illustration/GardenScene.swift`.
 //
 // Tippen auf ein freigeschaltetes Spiel öffnet dessen Spiel-View
 // (Vollbild-Sheet); langes Drücken zeigt dessen Anleitung
 // (`GameInstructionSheet`). Beides ist für gesperrte Spiele ohne Wirkung -
 // deren Spiel-Views und Anleitungen entstehen erst in B5/B6.
 //
-// Aktuelle Tee-Stufe fuer die geoeffnete Spiel-View: in diesem Block (B3)
-// gibt es noch keine echte Spielerstufe (kommt erst in B4), daher wird fest
-// `.sencha` übergeben - das einzige, was ohnehin spielbar ist. Ausnahme nur
-// im DEBUG-Build (Block B3 Aufgabe 5 P5b): `-uitest-game-level` erlaubt UI-
-// Tests, denselben Durchlauf auch für Oolong/Matcha zu prüfen. Der
-// Release-Build hat diese Verzweigung nie, da `LaunchConfiguration`
-// komplett unter `#if DEBUG` liegt - deshalb braucht `resolvedGameLevel`
-// selbst eine `#if DEBUG`/`#else`-Verzweigung.
+// Tee-Stufe fuer die geoeffnete Spiel-View: die Spielerstufe aus dem
+// `PlayerStore` (Block B4). Ausnahme nur im DEBUG-Build (Block B3 Aufgabe 5
+// P5b): `-uitest-game-level` hat Vorrang und erlaubt UI-Tests, denselben
+// Durchlauf auch für Oolong/Matcha zu prüfen. Der Release-Build hat diese
+// Verzweigung nie, da `LaunchConfiguration` komplett unter `#if DEBUG` liegt.
+//
+// Freies Spielen zählt NICHT als Teepause: Ergebnisse werden gespeichert
+// (`recordGameResult`), aber `completeTeaBreak()` wird hier nie aufgerufen.
 
 import SwiftUI
 
 struct GamesLibraryView: View {
+    @Environment(PlayerStore.self) private var playerStore
     @State private var selectedGame: GameCatalogEntry?
     @State private var instructionEntry: GameCatalogEntry?
 
@@ -40,7 +42,12 @@ struct GamesLibraryView: View {
         }
         .background(Color("bg-garden"))
         .fullScreenCover(item: $selectedGame) { entry in
-            gameView(for: entry)
+            GameViewFactory.view(
+                for: entry.id,
+                level: resolvedGameLevel,
+                onResult: { playerStore.recordGameResult(gameID: entry.id, result: $0) },
+                onFinished: { selectedGame = nil }
+            )
         }
         .sheet(item: $instructionEntry) { entry in
             GameInstructionSheet(
@@ -80,20 +87,20 @@ struct GamesLibraryView: View {
 
     private func gameTile(_ entry: GameCatalogEntry) -> some View {
         Button {
-            guard entry.isUnlocked else { return }
+            guard isUnlocked(entry) else { return }
             selectedGame = entry
         } label: {
             tileContent(entry)
         }
         .buttonStyle(.plain)
-        .disabled(!entry.isUnlocked)
+        .disabled(!isUnlocked(entry))
         .onLongPressGesture(minimumDuration: 0.5) {
-            guard entry.isUnlocked else { return }
+            guard isUnlocked(entry) else { return }
             instructionEntry = entry
         }
         .accessibilityLabel(Text(LocalizedStringKey(entry.nameKey)))
         .accessibilityHint(
-            entry.isUnlocked
+            isUnlocked(entry)
                 ? ""
                 : String(localized: "games.locked.hint", defaultValue: "Noch gesperrt")
         )
@@ -113,66 +120,61 @@ struct GamesLibraryView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .opacity(entry.isUnlocked ? 1 : 0.45)
+        .opacity(isUnlocked(entry) ? 1 : 0.45)
         .overlay {
-            if !entry.isUnlocked, let lockLabel = entry.lockLabel {
-                lockChip(lockLabel)
+            if !isUnlocked(entry) {
+                lockChip(lockText(for: entry))
             }
         }
     }
 
-    private func lockChip(_ label: GameLockLabel) -> some View {
+    private func lockChip(_ text: String) -> some View {
         GlassCard(radius: Radius.radiusLg, padding: Space.space2) {
             HStack(spacing: Space.space1) {
                 Image(systemName: "lock.fill")
                     .font(.system(size: Size.iconHelp, weight: .medium))
                     .foregroundStyle(Color("text"))
                     .accessibilityHidden(true)
-                Text(label.text)
+                Text(text)
                     .font(.mmLabel)
                     .foregroundStyle(Color("text"))
             }
         }
     }
 
-    @ViewBuilder
-    private func gameView(for entry: GameCatalogEntry) -> some View {
-        switch entry.id {
-        case TeapotRowGame().id:
-            TeapotRowGameView(level: resolvedGameLevel, onFinished: { selectedGame = nil })
-        case FireflyPondGame().id:
-            FireflyPondGameView(level: resolvedGameLevel, onFinished: { selectedGame = nil })
-        case MosaicBedGame().id:
-            MosaicBedGameView(level: resolvedGameLevel, onFinished: { selectedGame = nil })
-        case TeaLeafSortGame().id:
-            TeaLeafSortGameView(level: resolvedGameLevel, onFinished: { selectedGame = nil })
-        case BambooMathGame().id:
-            BambooMathGameView(level: resolvedGameLevel, onFinished: { selectedGame = nil })
-        default:
-            // Platzhalter-Spiele sind gesperrt (siehe `isUnlocked`) und
-            // oeffnen daher nie eine Spiel-View - dieser Zweig ist nur zur
-            // Erschoepfung des Switches vorhanden.
-            EmptyView()
-        }
+    private func isUnlocked(_ entry: GameCatalogEntry) -> Bool {
+        GameCatalog.isUnlocked(entry, playerLevel: playerStore.level)
     }
 
-    /// Siehe Datei-Kommentar oben: `.sencha`, außer ein UI-Test überschreibt
-    /// das im DEBUG-Build explizit über `-uitest-game-level`.
+    /// Text des Schloss-Chips: "ab Oolong/Matcha", solange die Spielerstufe
+    /// noch darunter liegt; ist die Stufe erreicht, das Spiel aber noch nicht
+    /// gebaut, "Kommt bald".
+    private func lockText(for entry: GameCatalogEntry) -> String {
+        if entry.minLevel > playerStore.level, let label = entry.lockLabel {
+            return label.text
+        }
+        return String(localized: "game.locked.soon", defaultValue: "Kommt bald")
+    }
+
+    /// Siehe Datei-Kommentar oben: die Spielerstufe, außer ein UI-Test
+    /// überschreibt sie im DEBUG-Build explizit über `-uitest-game-level`.
     private var resolvedGameLevel: TeaLevel {
         #if DEBUG
-        LaunchConfiguration.fromProcessArguments().gameLevel ?? .sencha
+        LaunchConfiguration.fromProcessArguments().gameLevel ?? playerStore.level
         #else
-        .sencha
+        playerStore.level
         #endif
     }
 }
 
 #Preview("Hell") {
     GamesLibraryView()
+        .environment(PlayerStore.preview())
         .preferredColorScheme(.light)
 }
 
 #Preview("Dunkel") {
     GamesLibraryView()
+        .environment(PlayerStore.preview())
         .preferredColorScheme(.dark)
 }

@@ -1,7 +1,7 @@
 // GameCatalog.swift
 // Katalog-Metadaten aller 14 Spiele (MASTER-PROMPT.md, Abschnitt 6) fuer die
 // Spiele-Bibliothek (Block B3 Aufgabe 4, `App/GamesLibraryView.swift`):
-// die 5 bereits gebauten Sencha-Spiele (`isUnlocked == true`) plus 9
+// die 5 bereits gebauten Sencha-Spiele (`isImplemented == true`) plus 9
 // Platzhalter-Eintraege fuer die Oolong-/Matcha-Spiele, deren echte
 // `GameDefinition`-Typen erst in B5/B6 entstehen.
 //
@@ -59,17 +59,15 @@ public extension GameArea {
     }
 }
 
-/// Ein Eintrag der Spiele-Bibliothek: Katalog-Metadaten plus Freischalt-
-/// Status. `isUnlocked` ist in diesem Block (B3) bewusst NICHT von einer
-/// echten Spielerstufe abhaengig (die kommt erst in B4) - es gilt schlicht
-/// "alles außer den 5 Sencha-Spielen ist gesperrt", wie im Auftrag
-/// vorgegeben.
+/// Ein Eintrag der Spiele-Bibliothek: Katalog-Metadaten plus Angabe, ob das
+/// Spiel schon gebaut ist (`isImplemented`). Die Freischaltung haengt von der
+/// Spielerstufe ab, siehe `GameCatalog.isUnlocked(_:playerLevel:)`.
 public struct GameCatalogEntry: Identifiable, Sendable {
     public let id: String
     public let nameKey: String
     public let area: GameArea
     public let minLevel: TeaLevel
-    public let isUnlocked: Bool
+    public let isImplemented: Bool
     public let hasTrialRound: Bool
     public let shortRuleKeys: [String]
     public let instructionPages: [GameInstructionPage]
@@ -79,7 +77,7 @@ public struct GameCatalogEntry: Identifiable, Sendable {
         nameKey: String,
         area: GameArea,
         minLevel: TeaLevel,
-        isUnlocked: Bool,
+        isImplemented: Bool,
         hasTrialRound: Bool = false,
         shortRuleKeys: [String] = [],
         instructionPages: [GameInstructionPage] = []
@@ -88,7 +86,7 @@ public struct GameCatalogEntry: Identifiable, Sendable {
         self.nameKey = nameKey
         self.area = area
         self.minLevel = minLevel
-        self.isUnlocked = isUnlocked
+        self.isImplemented = isImplemented
         self.hasTrialRound = hasTrialRound
         self.shortRuleKeys = shortRuleKeys
         self.instructionPages = instructionPages
@@ -124,7 +122,7 @@ public enum GameCatalog {
             nameKey: teapotRow.nameKey,
             area: teapotRow.area,
             minLevel: teapotRow.minLevel,
-            isUnlocked: true,
+            isImplemented: true,
             hasTrialRound: teapotRow.hasTrialRound,
             shortRuleKeys: teapotRow.shortRuleKeys,
             instructionPages: [
@@ -150,7 +148,7 @@ public enum GameCatalog {
             nameKey: fireflyPond.nameKey,
             area: fireflyPond.area,
             minLevel: fireflyPond.minLevel,
-            isUnlocked: true,
+            isImplemented: true,
             hasTrialRound: fireflyPond.hasTrialRound,
             shortRuleKeys: fireflyPond.shortRuleKeys,
             instructionPages: [
@@ -176,7 +174,7 @@ public enum GameCatalog {
             nameKey: mosaicBed.nameKey,
             area: mosaicBed.area,
             minLevel: mosaicBed.minLevel,
-            isUnlocked: true,
+            isImplemented: true,
             hasTrialRound: mosaicBed.hasTrialRound,
             shortRuleKeys: mosaicBed.shortRuleKeys,
             instructionPages: [
@@ -202,7 +200,7 @@ public enum GameCatalog {
             nameKey: teaLeafSort.nameKey,
             area: teaLeafSort.area,
             minLevel: teaLeafSort.minLevel,
-            isUnlocked: true,
+            isImplemented: true,
             hasTrialRound: teaLeafSort.hasTrialRound,
             shortRuleKeys: teaLeafSort.shortRuleKeys,
             instructionPages: [
@@ -228,7 +226,7 @@ public enum GameCatalog {
             nameKey: bambooMath.nameKey,
             area: bambooMath.area,
             minLevel: bambooMath.minLevel,
-            isUnlocked: true,
+            isImplemented: true,
             hasTrialRound: bambooMath.hasTrialRound,
             shortRuleKeys: bambooMath.shortRuleKeys,
             instructionPages: bambooMath.instructionPages
@@ -240,35 +238,35 @@ public enum GameCatalog {
             nameKey: "game.teaCeremonyEcho.name",
             area: .workingMemory,
             minLevel: .oolong,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "lantern-colorword",
             nameKey: "game.lanternColorWord.name",
             area: .impulseControl,
             minLevel: .oolong,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "stone-lantern",
             nameKey: "game.stoneLantern.name",
             area: .spatialReasoning,
             minLevel: .oolong,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "garden-path-planner",
             nameKey: "game.gardenPathPlanner.name",
             area: .planning,
             minLevel: .oolong,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "word-garden",
             nameKey: "game.wordGarden.name",
             area: .language,
             minLevel: .oolong,
-            isUnlocked: false
+            isImplemented: false
         ),
 
         // 11-14: Matcha, Platzhalter - Logik folgt in Block B6.
@@ -277,30 +275,45 @@ public enum GameCatalog {
             nameKey: "game.moonBridge.name",
             area: .dualWorkingMemory,
             minLevel: .matcha,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "master-mosaic",
             nameKey: "game.masterMosaic.name",
             area: .reasoning,
             minLevel: .matcha,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "koi-swarm",
             nameKey: "game.koiSwarm.name",
             area: .dividedAttention,
             minLevel: .matcha,
-            isUnlocked: false
+            isImplemented: false
         ),
         GameCatalogEntry(
             id: "gardener-pattern",
             nameKey: "game.gardenerPattern.name",
             area: .patternRecognition,
             minLevel: .matcha,
-            isUnlocked: false
+            isImplemented: false
         ),
     ]
+
+    /// Kennungen der bereits gebauten (spielbaren) Spiele.
+    public static let playableGameIDs: Set<String> = Set(allGames.filter { $0.isImplemented }.map { $0.id })
+
+    /// Ein Spiel ist spielbar, wenn es gebaut ist und die Spielerstufe
+    /// mindestens seiner Mindeststufe entspricht.
+    public static func isUnlocked(_ entry: GameCatalogEntry, playerLevel: TeaLevel) -> Bool {
+        entry.isImplemented && entry.minLevel <= playerLevel
+    }
+
+    /// Alle spielbaren Spiele fuer eine Spielerstufe, in Katalog-Reihenfolge
+    /// (Grundlage fuer die Teepause).
+    public static func playableGames(for playerLevel: TeaLevel) -> [GameCatalogEntry] {
+        allGames.filter { isUnlocked($0, playerLevel: playerLevel) }
+    }
 
     /// Die Eintraege einer Stufe, in Katalog-Reihenfolge - fuer die
     /// nach Stufe gruppierten Abschnitte der Bibliothek.
