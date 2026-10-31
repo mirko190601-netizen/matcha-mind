@@ -214,7 +214,7 @@ final class PlayerStore {
     }
 
     private func completedDayKeys() -> Set<String> {
-        Set(allDayRecords().filter { $0.teaBreakCompleted }.map(.dayKey))
+        Set(allDayRecords().filter { $0.teaBreakCompleted }.map(\.dayKey))
     }
 
     // MARK: - Spiele

@@ -177,7 +177,7 @@ public struct GardenScene: View {
             decoElement(.cherryTree, item: item, width: 0.26, x: 0.54, y: 0.3, in: size)
         case "lantern-chain":
             HStack(spacing: Space.space3) {
-                ForEach(0..<5, id: .self) { _ in
+                ForEach(0..<5, id: \.self) { _ in
                     Circle().fill(Color("gold-300")).frame(width: Space.space2, height: Space.space2)
                 }
             }
@@ -212,7 +212,7 @@ public struct GardenScene: View {
         let visible = min(GardenGrowth.visiblePlantCount(stage: growthStage), Self.plantSpots.count)
         let scale = 0.8 + 0.1 * Double(max(0, min(growthStage, GardenGrowth.maxStage)))
         return ZStack {
-            ForEach(0..<visible, id: .self) { index in
+            ForEach(0..<visible, id: \.self) { index in
                 let spot = Self.plantSpots[index]
                 plant(spot.kind)
                     .scaleEffect(scale)
@@ -239,7 +239,7 @@ public struct GardenScene: View {
         let count = max(0, min(bonusBlossoms, Self.maxBonusBlossoms))
         if count > 0 {
             ZStack {
-                ForEach(0..<count, id: .self) { index in
+                ForEach(0..<count, id: \.self) { index in
                     ZStack {
                         Circle().fill(Color("blossom-300")).frame(width: Space.space3, height: Space.space3)
                         Circle().fill(Color("gold-300")).frame(width: Space.space1, height: Space.space1)
