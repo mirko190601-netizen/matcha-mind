@@ -5,6 +5,10 @@
 
 import SwiftUI
 
+// `@MainActor`: die Spiel-Views sind main-actor-isoliert; ohne diese
+// Isolation wuerden die nicht-`Sendable`-Closures ueber die Actor-Grenze
+// gereicht (Swift-6-Fehler "sending ... risks causing data races").
+@MainActor
 enum GameViewFactory {
     /// - Parameters:
     ///   - gameID: Kennung aus `GameCatalog` (z. B. "teapot-row").
