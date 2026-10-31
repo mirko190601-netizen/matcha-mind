@@ -573,17 +573,6 @@
         }
       }
     },
-    "placeholder.garden.body": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier wächst bald dein Garten."
-          }
-        }
-      }
-    },
     "placeholder.games.body": {
       "extractionState": "manual",
       "localizations": {
@@ -1790,6 +1779,193 @@
           "stringUnit": {
             "state": "translated",
             "value": "Noch gesperrt"
+          }
+        }
+      }
+    },
+    "garden.week.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Woche"
+          }
+        }
+      }
+    },
+    "garden.week.a11y": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld von %lld Teepausen diese Woche"
+          }
+        }
+      }
+    },
+    "garden.dew.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Tau"
+          }
+        }
+      }
+    },
+    "garden.dew.a11y": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Tautropfen"
+          }
+        }
+      }
+    },
+    "garden.bonus.a11y": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Bonus-Blüten"
+          }
+        }
+      }
+    },
+    "garden.shop.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deko-Shop"
+          }
+        }
+      }
+    },
+    "garden.shop.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deko-Shop"
+          }
+        }
+      }
+    },
+    "garden.shop.buy": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaufen"
+          }
+        }
+      }
+    },
+    "garden.shop.close": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        }
+      }
+    },
+    "garden.shop.owned": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steht in deinem Garten"
+          }
+        }
+      }
+    },
+    "garden.shop.needMore": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dir fehlen noch %lld Tau. Spiel einfach in Ruhe weiter."
+          }
+        }
+      }
+    },
+    "garden.shop.item.stepping-stones": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trittsteine"
+          }
+        }
+      }
+    },
+    "garden.shop.item.stone-lantern": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steinlaterne"
+          }
+        }
+      }
+    },
+    "garden.shop.item.bonsai": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonsai"
+          }
+        }
+      }
+    },
+    "garden.shop.item.lantern-chain": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laternenkette"
+          }
+        }
+      }
+    },
+    "garden.shop.item.moon-bridge-lantern": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mondbrücken-Laterne"
+          }
+        }
+      }
+    },
+    "garden.shop.item.cherry-tree": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirschbaum"
           }
         }
       }

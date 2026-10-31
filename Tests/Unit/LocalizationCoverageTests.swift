@@ -18,7 +18,7 @@ final class LocalizationCoverageTests: XCTestCase {
             .deletingLastPathComponent() // Tests
     }
 
-    private let sourceDirectoryNames = ["App", "DesignSystem", "Illustration", "Games", "Progress", "Teepause", "Settings"]
+    private let sourceDirectoryNames = ["App", "DesignSystem", "Illustration", "Games", "Progress", "Teepause", "Settings", "Garden"]
 
     func testAllUsedLocalizationKeysExistInCatalog() throws {
         let usedKeys = try sourceDirectoryNames

@@ -16,7 +16,7 @@ final class AppLaunchUITests: XCTestCase {
         [
             (
                 String(localized: "tab.garden.title", defaultValue: "Garten"),
-                String(localized: "placeholder.garden.body", defaultValue: "Hier wächst bald dein Garten.")
+                String(localized: "garden.week.title", defaultValue: "Diese Woche")
             ),
             // Seit B3 P4 zeigt der "Spiele"-Tab die echte `GamesLibraryView`
             // (keinen Platzhalter mehr) - Erkennungsmerkmal ist deren

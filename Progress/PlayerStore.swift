@@ -18,6 +18,8 @@ import SwiftData
 final class PlayerStore {
     /// Anzahl aktiver Tage, um die "Lieber noch bleiben" ein Angebot verschiebt.
     static let deferralActiveDays = 7
+    /// Tautropfen pro abgeschlossener Spielrunde.
+    nonisolated static let dewPerGame = 12
 
     private let container: ModelContainer
     private let clock: AppClock
@@ -121,6 +123,8 @@ final class PlayerStore {
         day.hits += result.hits
         day.misses += result.misses
         day.level = profile.level
+        profile.dewDrops += Self.dewPerGame
+        profile.dewEarnedTotal += Self.dewPerGame
         gameRecord(for: gameID).lastPlayed = clock.now()
         save()
     }
@@ -133,6 +137,7 @@ final class PlayerStore {
         let day = dayRecord(for: todayKey)
         day.teaBreakCompleted = true
         save()
+        awardBonusBlossomIfReached()
         return pendingPromotion()
     }
 
@@ -159,6 +164,57 @@ final class PlayerStore {
     func deferPromotion() {
         profile.promotionDeferredUntilActiveDays = activeDaysAtCurrentLevel + Self.deferralActiveDays
         save()
+    }
+
+    // MARK: - Tau und Deko
+
+    /// Aktuell ausgebbarer Tau.
+    var dewDrops: Int { _ = revision; return profile.dewDrops }
+    /// Insgesamt verdienter Tau, sinkt nie.
+    var dewEarnedTotal: Int { _ = revision; return profile.dewEarnedTotal }
+    var ownedDecorationIDs: Set<String> { _ = revision; return Set(profile.decorationIDs) }
+
+    /// Kauft ein Deko-Stueck: nur wenn es existiert, noch nicht besessen wird
+    /// und genug Tau da ist. Zieht den Preis von `dewDrops` ab
+    /// (`dewEarnedTotal` bleibt unveraendert).
+    @discardableResult
+    func purchaseDecoration(id: String) -> Bool {
+        guard let item = DecorationCatalog.item(id: id),
+              !profile.decorationIDs.contains(id),
+              profile.dewDrops >= item.price else { return false }
+        profile.dewDrops -= item.price
+        profile.decorationIDs.append(id)
+        save()
+        return true
+    }
+
+    // MARK: - Wochenziel
+
+    var weeklyGoalDays: Int { profile.weeklyGoalDays }
+
+    /// Je Wochentag (Montag bis Sonntag) der aktuellen Woche: Teepause erledigt?
+    var weekActiveDayStates: [Bool] {
+        _ = revision
+        let completed = completedDayKeys()
+        return WeeklyGoal.dayKeys(ofWeekContaining: clock.now(), calendar: calendar).map { completed.contains($0) }
+    }
+
+    var activeDaysThisWeek: Int { weekActiveDayStates.filter { $0 }.count }
+
+    var bonusBlossomCount: Int { _ = revision; return profile.bonusBlossomWeeks.count }
+
+    /// Vergibt die Bonus-Bluete der laufenden Woche, sobald das Wochenziel
+    /// erreicht ist - hoechstens einmal je Woche.
+    private func awardBonusBlossomIfReached() {
+        let weekKey = WeeklyGoal.weekKey(for: clock.now(), calendar: calendar)
+        guard WeeklyGoal.isReached(activeDays: activeDaysThisWeek, goal: profile.weeklyGoalDays),
+              !profile.bonusBlossomWeeks.contains(weekKey) else { return }
+        profile.bonusBlossomWeeks.append(weekKey)
+        save()
+    }
+
+    private func completedDayKeys() -> Set<String> {
+        Set(allDayRecords().filter { $0.teaBreakCompleted }.map(.dayKey))
     }
 
     // MARK: - Spiele

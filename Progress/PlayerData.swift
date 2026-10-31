@@ -25,8 +25,13 @@ final class PlayerProfile {
     /// `LevelProgression.reentryActiveDays`, unabhaengig von der Stufe.
     var levelLoweredManually: Bool = false
     var dewDrops: Int = 0
+    /// Insgesamt verdiente Tautropfen, sinkt nie (steuert das Garten-Wachstum).
+    var dewEarnedTotal: Int = 0
     var decorationIDs: [String] = []
     var weeklyGoalDays: Int = 4
+    /// ISO-Wochenschluessel (z. B. `2026-W44`), fuer die eine Bonus-Bluete
+    /// vergeben wurde (hoechstens einmal je Woche).
+    var bonusBlossomWeeks: [String] = []
     var reminderHour: Int?
     var reminderMinute: Int?
     var adFreePurchasedCache: Bool = false

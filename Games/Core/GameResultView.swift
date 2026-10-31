@@ -1,10 +1,8 @@
 // GameResultView.swift
 // Komponente "Ergebnis-Screen" (MASTER-PROMPT.md, Block B3 Aufgabe 1):
-// zeigt Treffer, Genauigkeit in % und den Tautropfen-Platzhalter "+12
-// Tau" nach jeder Spielrunde. Nutzt ausschliesslich den Ton
-// `feedback-good` - kein Rot, kein Countdown irgendwo im Baukasten. Die
-// echte Tau-Berechnung (statt des hier uebergebenen Platzhalter-Werts)
-// folgt erst in Block B4.
+// zeigt Treffer, Genauigkeit in % und die Tautropfen ("+12 Tau")
+// nach jeder Spielrunde. Nutzt ausschliesslich den Ton
+// `feedback-good` - kein Rot, kein Countdown irgendwo im Baukasten.
 
 import SwiftUI
 
@@ -16,8 +14,8 @@ public struct GameResultView: View {
 
     /// - Parameters:
     ///   - result: Ergebnis der beendeten Runde (`GameSession.finish`).
-    ///   - dewReward: Anzahl gewonnener Tautropfen. Platzhalter-Zahl bis
-    ///     zur echten Tau-Logik in Block B4.
+    ///   - dewReward: Anzahl gewonnener Tautropfen (aus den Spiel-Views: `PlayerStore.dewPerGame`, derselbe Wert, den
+    ///     `recordGameResult` gutschreibt).
     ///   - onContinue: Aufruf bei "Weiter".
     public init(result: GameResult, dewReward: Int, onContinue: @escaping () -> Void) {
         self.result = result

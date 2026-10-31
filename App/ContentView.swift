@@ -9,7 +9,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab(String(localized: "tab.garden.title", defaultValue: "Garten"), systemImage: "leaf.fill") {
-                GardenPlaceholderView()
+                GardenHomeView()
             }
             .accessibilityIdentifier("tab.garden")
             Tab(String(localized: "tab.games.title", defaultValue: "Spiele"), systemImage: "gamecontroller.fill") {

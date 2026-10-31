@@ -79,7 +79,7 @@ public struct MosaicBedGameView: View {
                 Spacer()
 
                 if case .finished(let result) = session.state {
-                    GameResultView(result: result, dewReward: 12, onContinue: onFinished)
+                    GameResultView(result: result, dewReward: PlayerStore.dewPerGame, onContinue: onFinished)
                 } else {
                     grid
                     Spacer()

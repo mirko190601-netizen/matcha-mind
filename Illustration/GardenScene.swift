@@ -37,11 +37,38 @@ public enum GardenLockLabel {
 public struct GardenScene: View {
     private let oolongUnlocked: Bool
     private let matchaUnlocked: Bool
+    private let growthStage: Int
+    private let decorationIDs: Set<String>
+    private let bonusBlossoms: Int
 
-    public init(oolongUnlocked: Bool, matchaUnlocked: Bool) {
+    /// - Parameters:
+    ///   - growthStage: Wachstum 0-4 (`GardenGrowth.stage`): mehr und
+    ///     groessere Pflanzen.
+    ///   - decorationIDs: gekaufte Deko (`DecorationCatalog`), erscheint an
+    ///     festen Plaetzen.
+    ///   - bonusBlossoms: Anzahl Bonus-Bluetes (Wochenziel) als kleine Blueten.
+    public init(
+        oolongUnlocked: Bool,
+        matchaUnlocked: Bool,
+        growthStage: Int = 0,
+        decorationIDs: Set<String> = [],
+        bonusBlossoms: Int = 0
+    ) {
         self.oolongUnlocked = oolongUnlocked
         self.matchaUnlocked = matchaUnlocked
+        self.growthStage = growthStage
+        self.decorationIDs = decorationIDs
+        self.bonusBlossoms = bonusBlossoms
     }
+
+    /// Feste Pflanzenplaetze (Bruchteile der Szene) und ihre Art; je Wachstums-
+    /// stufe werden zwei weitere bewachsen (`GardenGrowth.visiblePlantCount`).
+    private enum PlantKind { case moss, bamboo, blossom }
+    private static let plantSpots: [(x: Double, y: Double, kind: PlantKind)] = [
+        (0.10, 0.70, .moss), (0.30, 0.68, .bamboo), (0.68, 0.70, .blossom), (0.90, 0.72, .moss),
+        (0.08, 0.90, .bamboo), (0.28, 0.92, .blossom), (0.72, 0.93, .moss), (0.92, 0.90, .blossom),
+    ]
+    private static let maxBonusBlossoms = 12
 
     public var body: some View {
         GeometryReader { geo in
@@ -58,11 +85,10 @@ public struct GardenScene: View {
                     .frame(width: geo.size.width * 0.3)
                     .position(x: geo.size.width * 0.2, y: geo.size.height * 0.46)
 
-                // Deko: Kirschbaum-Huegel, immer sichtbar, zwischen Mittel-
-                // und Vordergrund.
-                decoArea
-                    .frame(width: geo.size.width * 0.26)
-                    .position(x: geo.size.width * 0.54, y: geo.size.height * 0.3)
+                // Deko (gekauft): feste Plaetze zwischen Mittel- und Vordergrund.
+                ForEach(DecorationCatalog.items.filter { decorationIDs.contains($0.id) }) { item in
+                    decoration(item, in: geo.size)
+                }
 
                 // Ebene 3 (Vordergrund): Sencha-Bereich, Teehaus + Koi-Teich.
                 senchaArea(isUnlocked: true)
@@ -71,6 +97,10 @@ public struct GardenScene: View {
 
                 // Tierbesuche (MASTER-PROMPT.md B2 P8): rein dekorativ, siehe
                 // `Illustration/AnimalVisit.swift`.
+                // Wachstum und Bonus-Blueten liegen ueber dem Boden, unter den Tieren.
+                growthLayer(in: geo.size)
+                blossomLayer(in: geo.size)
+
                 AnimalVisitOverlay()
             }
             .clipped()
@@ -132,10 +162,97 @@ public struct GardenScene: View {
         }
     }
 
-    // MARK: - Deko: Kirschbaum-Huegel
+    // MARK: - Deko (gekauft)
 
-    private var decoArea: some View {
-        GardenElementIllustration(kind: .cherryTree)
+    @ViewBuilder
+    private func decoration(_ item: DecorationItem, in size: CGSize) -> some View {
+        switch item.id {
+        case "stepping-stones":
+            decoElement(.steppingStones, item: item, width: 0.2, x: 0.36, y: 0.62, in: size)
+        case "stone-lantern":
+            decoElement(.stoneLantern, item: item, width: 0.12, x: 0.88, y: 0.6, in: size)
+        case "bonsai":
+            decoElement(.bonsai, item: item, width: 0.14, x: 0.72, y: 0.6, in: size)
+        case "cherry-tree":
+            decoElement(.cherryTree, item: item, width: 0.26, x: 0.54, y: 0.3, in: size)
+        case "lantern-chain":
+            HStack(spacing: Space.space3) {
+                ForEach(0..<5, id: .self) { _ in
+                    Circle().fill(Color("gold-300")).frame(width: Space.space2, height: Space.space2)
+                }
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(item.name)
+            .position(x: size.width * 0.5, y: size.height * 0.08)
+        case "moon-bridge-lantern":
+            Circle()
+                .fill(Color("gold-300"))
+                .frame(width: Space.space4, height: Space.space4)
+                .shadow(color: Color("gold-300"), radius: Space.space2)
+                .accessibilityLabel(item.name)
+                .position(x: size.width * 0.78, y: size.height * 0.12)
+        default:
+            EmptyView()
+        }
+    }
+
+    private func decoElement(
+        _ kind: GardenElementKind, item: DecorationItem,
+        width: Double, x: Double, y: Double, in size: CGSize
+    ) -> some View {
+        GardenElementIllustration(kind: kind)
+            .accessibilityLabel(item.name)
+            .frame(width: size.width * width)
+            .position(x: size.width * x, y: size.height * y)
+    }
+
+    // MARK: - Wachstum und Bonus-Blueten
+
+    private func growthLayer(in size: CGSize) -> some View {
+        let visible = min(GardenGrowth.visiblePlantCount(stage: growthStage), Self.plantSpots.count)
+        let scale = 0.8 + 0.1 * Double(max(0, min(growthStage, GardenGrowth.maxStage)))
+        return ZStack {
+            ForEach(0..<visible, id: .self) { index in
+                let spot = Self.plantSpots[index]
+                plant(spot.kind)
+                    .scaleEffect(scale)
+                    .position(x: size.width * spot.x, y: size.height * spot.y)
+            }
+        }
+        .accessibilityHidden(true)
+    }
+
+    @ViewBuilder
+    private func plant(_ kind: PlantKind) -> some View {
+        switch kind {
+        case .moss:
+            Ellipse().fill(Color("matcha-300")).frame(width: Space.space8, height: Space.space3)
+        case .bamboo:
+            GardenElementIllustration(kind: .bamboo).frame(width: Space.space6)
+        case .blossom:
+            Circle().fill(Color("blossom-300")).frame(width: Space.space4, height: Space.space4)
+        }
+    }
+
+    @ViewBuilder
+    private func blossomLayer(in size: CGSize) -> some View {
+        let count = max(0, min(bonusBlossoms, Self.maxBonusBlossoms))
+        if count > 0 {
+            ZStack {
+                ForEach(0..<count, id: .self) { index in
+                    ZStack {
+                        Circle().fill(Color("blossom-300")).frame(width: Space.space3, height: Space.space3)
+                        Circle().fill(Color("gold-300")).frame(width: Space.space1, height: Space.space1)
+                    }
+                    .position(
+                        x: size.width * (0.08 + 0.07 * Double(index)),
+                        y: size.height * (0.97 - 0.03 * Double(index % 2))
+                    )
+                }
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(String(format: String(localized: "garden.bonus.a11y", defaultValue: "%lld Bonus-Blüten"), count))
+        }
     }
 
     /// Daemmt einen Bereich bei `isUnlocked == false` auf 45 % Deckkraft und

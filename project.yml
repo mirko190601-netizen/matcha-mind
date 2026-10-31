@@ -32,6 +32,7 @@ targets:
       - path: Games
       - path: Progress
       - path: Teepause
+      - path: Garden
       - path: Settings
       # String Catalogs (Xcode 15+). XcodeGen kennt keinen eigenen
       # Target-Schluessel "resources" (geprueft im XcodeGen-Quellcode,
