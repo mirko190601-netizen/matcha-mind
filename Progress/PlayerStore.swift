@@ -78,12 +78,14 @@ final class PlayerStore {
     var highestLevel: TeaLevel { profile.highestLevel }
 
     /// Manuelle Wahl: Zaehlung der aktiven Tage beginnt neu, ein
-    /// aufgeschobenes Angebot entfaellt.
+    /// aufgeschobenes Angebot entfaellt. Nach einer Senkung kommt das naechste
+    /// Angebot nach `LevelProgression.reentryActiveDays` aktiven Tagen.
     func setLevel(_ newLevel: TeaLevel) {
         // Ist die heutige Teepause schon erledigt (typisch beim
         // Aufstiegs-Moment direkt nach dem Abschluss), zählt dieser Tag
         // noch zur alten Stufe - die neue Stufe beginnt erst morgen.
         let alreadyCountedToday = isTeaBreakCompletedToday
+        profile.levelLoweredManually = newLevel < profile.level
         profile.level = newLevel
         profile.levelSinceDayKey = alreadyCountedToday ? tomorrowKey : todayKey
         profile.highestLevel = max(profile.highestLevel, newLevel)
@@ -142,7 +144,8 @@ final class PlayerStore {
             autoAdvance: profile.autoAdvance,
             activeDaysAtCurrentLevel: activeDaysAtCurrentLevel,
             lastSevenActiveDays: recentActiveDaySummaries(),
-            deferredUntilActiveDays: profile.promotionDeferredUntilActiveDays
+            deferredUntilActiveDays: profile.promotionDeferredUntilActiveDays,
+            loweredManually: profile.levelLoweredManually
         )
     }
 

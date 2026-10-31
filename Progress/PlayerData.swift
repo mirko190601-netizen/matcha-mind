@@ -21,6 +21,9 @@ final class PlayerProfile {
     /// Nach "Lieber noch bleiben": kein neues Angebot, bis so viele aktive
     /// Tage seit Stufenbeginn erreicht sind.
     var promotionDeferredUntilActiveDays: Int?
+    /// Aktuelle Stufe wurde manuell gesenkt: naechstes Angebot nach
+    /// `LevelProgression.reentryActiveDays`, unabhaengig von der Stufe.
+    var levelLoweredManually: Bool = false
     var dewDrops: Int = 0
     var decorationIDs: [String] = []
     var weeklyGoalDays: Int = 4

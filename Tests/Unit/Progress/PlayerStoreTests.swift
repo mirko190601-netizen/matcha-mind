@@ -167,6 +167,80 @@ final class PlayerStoreTests: XCTestCase {
         XCTAssertEqual(store.activeDaysAtCurrentLevel, 0)
     }
 
+    /// Spielt 14 aktive Tage: Tag 1–13 kein Angebot, Tag 14 Angebot `expected`.
+    private func assertOfferOnFourteenthActiveDay(_ store: PlayerStore, clock: FixedClock, expected: TeaLevel) {
+        for day in 1...14 {
+            let offer = playDay(store)
+            if day < 14 {
+                XCTAssertNil(offer, "Tag \(day) nach manueller Senkung darf noch kein Angebot liefern")
+            } else {
+                XCTAssertEqual(offer, expected, "Tag 14 nach manueller Senkung muss das Angebot liefern")
+            }
+            clock.advance(by: oneDay)
+        }
+    }
+
+    func testManuallyLoweredToSenchaOffersPromotionAfterFourteenNewActiveDays() throws {
+        let clock = makeClock()
+        let store = try makeStore(clock: clock)
+        store.setLevel(.oolong)
+        for _ in 1...5 {
+            playDay(store)
+            clock.advance(by: oneDay)
+        }
+
+        store.setLevel(.sencha)
+        XCTAssertTrue(store.autoAdvance)
+
+        assertOfferOnFourteenthActiveDay(store, clock: clock, expected: .oolong)
+    }
+
+    func testManuallyLoweredToOolongOffersPromotionAfterFourteenNewActiveDays() throws {
+        let clock = makeClock()
+        let store = try makeStore(clock: clock)
+        store.setLevel(.matcha)
+        for _ in 1...5 {
+            playDay(store)
+            clock.advance(by: oneDay)
+        }
+
+        store.setLevel(.oolong)
+        XCTAssertTrue(store.autoAdvance)
+
+        assertOfferOnFourteenthActiveDay(store, clock: clock, expected: .matcha)
+    }
+
+    func testLoweringAfterTodaysTeaBreakCountsFromTomorrow() throws {
+        let clock = makeClock()
+        let store = try makeStore(clock: clock)
+        store.setLevel(.oolong)
+        playDay(store)
+
+        store.setLevel(.sencha)
+        XCTAssertEqual(store.activeDaysAtCurrentLevel, 0)
+        clock.advance(by: oneDay)
+
+        assertOfferOnFourteenthActiveDay(store, clock: clock, expected: .oolong)
+    }
+
+    func testRaisingAfterManualLoweringUsesRegularDays() throws {
+        let clock = makeClock()
+        let store = try makeStore(clock: clock)
+        store.setLevel(.matcha)
+        store.setLevel(.sencha)
+        store.setLevel(.oolong)
+
+        for day in 1...21 {
+            let offer = playDay(store)
+            if day < 21 {
+                XCTAssertNil(offer, "Tag \(day) nach manuellem Hochsetzen: reguläre 21 Tage")
+            } else {
+                XCTAssertEqual(offer, .matcha)
+            }
+            clock.advance(by: oneDay)
+        }
+    }
+
     func testDeferPromotionPostponesOfferBySevenActiveDays() throws {
         let clock = makeClock()
         let store = try makeStore(clock: clock)

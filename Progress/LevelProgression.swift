@@ -23,6 +23,8 @@ enum LevelProgression {
     static let senchaToOolongActiveDays = 14
     /// Aktive Tage seit Stufenbeginn bis zum Angebot Oolong -> Matcha.
     static let oolongToMatchaActiveDays = 21
+    /// Aktive Tage auf einer manuell gesenkten Stufe bis zum naechsten Angebot.
+    static let reentryActiveDays = 14
     /// Mindest-Genauigkeit in Prozent.
     static let requiredAccuracyPercent = 75
     /// Anzahl der aktiven Tage, ueber die die Genauigkeit gemittelt wird.
@@ -48,12 +50,15 @@ enum LevelProgression {
     ///   - deferredUntilActiveDays: gesetzt, wenn der Spieler "Lieber noch
     ///     bleiben" gewaehlt hat; bis diese Zahl aktiver Tage erreicht ist,
     ///     gibt es kein neues Angebot.
+    ///   - loweredManually: aktuelle Stufe wurde manuell gesenkt; dann gilt
+    ///     `reentryActiveDays` statt der regulaeren Tageszahl.
     static func promotionTarget(
         currentLevel: TeaLevel,
         autoAdvance: Bool,
         activeDaysAtCurrentLevel: Int,
         lastSevenActiveDays: [ActiveDaySummary],
-        deferredUntilActiveDays: Int?
+        deferredUntilActiveDays: Int?,
+        loweredManually: Bool = false
     ) -> TeaLevel? {
         guard autoAdvance else { return nil }
         if let deferredUntilActiveDays, activeDaysAtCurrentLevel < deferredUntilActiveDays {
@@ -73,7 +78,8 @@ enum LevelProgression {
             return nil
         }
 
-        guard activeDaysAtCurrentLevel >= requiredDays else { return nil }
+        let days = loweredManually ? reentryActiveDays : requiredDays
+        guard activeDaysAtCurrentLevel >= days else { return nil }
         guard accuracyMeetsThreshold(lastActiveDays: lastSevenActiveDays) else { return nil }
         return target
     }
