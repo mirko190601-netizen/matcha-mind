@@ -10,6 +10,7 @@ import SwiftUI
 
 struct TeaBreakView: View {
     @Environment(PlayerStore.self) private var playerStore
+    @Environment(\.reminderCoordinator) private var reminders
 
     /// Schliesst die Teepause (Rueckkehr in den Garten).
     let onClose: () -> Void
@@ -177,6 +178,10 @@ struct TeaBreakView: View {
         if let target = playerStore.completeTeaBreak() {
             offeredPromotion = target
             showPromotion = true
+        }
+        // Heute entfaellt die Erinnerung, die naechsten werden neu geplant.
+        if let reminders {
+            Task { await reminders.reschedule() }
         }
     }
 

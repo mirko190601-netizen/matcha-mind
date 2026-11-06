@@ -51,7 +51,7 @@ final class PlayerStore {
         return try ModelContainer(for: schema, configurations: [configuration])
     }
 
-    init(container: ModelContainer, clock: AppClock, calendar: Calendar = .current) {
+    init(container: ModelContainer, clock: AppClock, calendar: Calendar = .autoupdatingCurrent) {
         self.container = container
         self.clock = clock
         self.calendar = calendar
@@ -243,6 +243,56 @@ final class PlayerStore {
         guard record.fineLevel != level else { return }
         record.fineLevel = level
         save()
+    }
+
+    // MARK: - Erinnerung
+
+    var onboardingCompleted: Bool { _ = revision; return profile.onboardingCompleted }
+
+    func completeOnboarding() {
+        guard !profile.onboardingCompleted else { return }
+        profile.onboardingCompleted = true
+        save()
+    }
+
+    /// Gewaehlte Uhrzeit der Erinnerung, `nil` wenn keine gewaehlt wurde.
+    var reminderTime: ReminderTime? {
+        _ = revision
+        guard let hour = profile.reminderHour, let minute = profile.reminderMinute else { return nil }
+        return ReminderTime(hour: hour, minute: minute)
+    }
+
+    /// Speichert die Uhrzeit und schaltet die Erinnerung (wieder) ein.
+    func setReminderTime(_ time: ReminderTime) {
+        profile.reminderHour = time.hour
+        profile.reminderMinute = time.minute
+        profile.reminderOff = false
+        save()
+    }
+
+    var reminderOff: Bool { _ = revision; return profile.reminderOff }
+
+    func setReminderOff(_ off: Bool) {
+        profile.reminderOff = off
+        save()
+    }
+
+    var invitationDate: Date? { _ = revision; return profile.invitationDate }
+
+    func setInvitationDate(_ date: Date) {
+        profile.invitationDate = date
+        save()
+    }
+
+    /// Anfang des letzten aktiven Tages (Teepause erledigt), sonst des
+    /// Installationstages.
+    var lastActiveDay: Date {
+        _ = revision
+        let lastKey = allDayRecords().filter { $0.teaBreakCompleted }.map(\.dayKey).max()
+        if let lastKey, let date = DayKey.date(from: lastKey, calendar: calendar) {
+            return date
+        }
+        return calendar.startOfDay(for: profile.installDate)
     }
 
     // MARK: - Hilfen

@@ -27,11 +27,17 @@ import SwiftUI
 ///   geöffnet wird (Block B3 Aufgabe 5 P5b: "Start-bis-Ergebnis-Durchlauf
 ///   für alle 3 Stufen"). Echte Spielerstufen kommen erst in Block B4 -
 ///   ohne dieses Argument bleibt es bei `.sencha`, wie im Release-Build.
+/// - `-uitest-show-onboarding`: zeigt den Erststart (Begrüßung, Uhrzeit)
+///   trotz UI-Test. Sonst überspringt ihn jedes `-uitest-*`-Argument.
 struct LaunchConfiguration {
     let personaID: String?
     let clock: FixedClock?
     let colorScheme: ColorScheme?
     let gameLevel: TeaLevel?
+    /// Mindestens ein `-uitest-*`-Argument ist gesetzt (egal welches).
+    let hasUITestArguments: Bool
+    /// `-uitest-show-onboarding`: der Erststart soll trotz UI-Test erscheinen.
+    let showOnboarding: Bool
 
     /// Liest die Argumente aus `ProcessInfo.processInfo.arguments`.
     static func fromProcessArguments() -> LaunchConfiguration {
@@ -61,6 +67,10 @@ struct LaunchConfiguration {
         }
 
         let gameLevel: TeaLevel?
+    /// Mindestens ein `-uitest-*`-Argument ist gesetzt (egal welches).
+    let hasUITestArguments: Bool
+    /// `-uitest-show-onboarding`: der Erststart soll trotz UI-Test erscheinen.
+    let showOnboarding: Bool
         switch gameLevelString {
         case "sencha":
             gameLevel = .sencha
@@ -72,7 +82,14 @@ struct LaunchConfiguration {
             gameLevel = nil
         }
 
-        return LaunchConfiguration(personaID: personaID, clock: clock, colorScheme: colorScheme, gameLevel: gameLevel)
+        return LaunchConfiguration(
+            personaID: personaID,
+            clock: clock,
+            colorScheme: colorScheme,
+            gameLevel: gameLevel,
+            hasUITestArguments: arguments.contains { $0.hasPrefix("-uitest-") },
+            showOnboarding: arguments.contains("-uitest-show-onboarding")
+        )
     }
 
     /// Liefert den Wert, der unmittelbar nach `flag` in `arguments` steht,

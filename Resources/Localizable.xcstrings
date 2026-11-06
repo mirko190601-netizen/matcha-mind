@@ -1,6 +1,149 @@
 {
   "sourceLanguage": "de",
   "strings": {
+    "notification.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matcha Mind"
+          }
+        }
+      }
+    },
+    "notification.daily.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Teegarten ist etwas aufgeblüht. Magst du nachsehen?"
+          }
+        }
+      }
+    },
+    "notification.return3.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Bambushain raschelt es. Magst du mal reinschauen?"
+          }
+        }
+      }
+    },
+    "notification.return7.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Fuchs war wieder im Garten. Schau gern vorbei, wenn du Lust hast."
+          }
+        }
+      }
+    },
+    "notification.invitation.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn du magst: Eine kleine Teepause im Garten wartet auf dich."
+          }
+        }
+      }
+    },
+    "onboarding.welcome.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willkommen bei Matcha Mind"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gehirnjogging im Teegarten. Jeden Tag eine kleine Teepause mit drei kurzen Spielen."
+          }
+        }
+      }
+    },
+    "onboarding.welcome.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        }
+      }
+    },
+    "onboarding.time.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wann magst du erinnert werden?"
+          }
+        }
+      }
+    },
+    "onboarding.time.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu dieser Zeit bekommst du einen leisen Hinweis. Du kannst das jederzeit ändern."
+          }
+        }
+      }
+    },
+    "onboarding.time.picker": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit der Erinnerung"
+          }
+        }
+      }
+    },
+    "onboarding.time.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerung festlegen"
+          }
+        }
+      }
+    },
+    "onboarding.time.skip": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Erinnerung"
+          }
+        }
+      }
+    },
     "game.locked.soon": {
       "extractionState": "manual",
       "localizations": {

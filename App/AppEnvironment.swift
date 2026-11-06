@@ -27,17 +27,23 @@ struct AppEnvironment: Sendable {
     /// Release-Build und in jedem UI-Test ohne dieses Argument - dann gilt
     /// unverändert das Systemverhalten.
     let colorScheme: ColorScheme?
+    /// Ob der Erststart (Begrüßung, Uhrzeit der Erinnerung) erscheinen darf.
+    /// Im Release immer `true`; in DEBUG-UI-Tests aus (siehe
+    /// `fromLaunchArguments()`), damit bestehende Abläufe unverändert bleiben.
+    let showsOnboarding: Bool
 
     init(
         clock: AppClock = SystemClock(),
         isUITesting: Bool = false,
         personaID: String? = nil,
-        colorScheme: ColorScheme? = nil
+        colorScheme: ColorScheme? = nil,
+        showsOnboarding: Bool = true
     ) {
         self.clock = clock
         self.isUITesting = isUITesting
         self.personaID = personaID
         self.colorScheme = colorScheme
+        self.showsOnboarding = showsOnboarding
     }
 
     #if DEBUG
@@ -48,14 +54,22 @@ struct AppEnvironment: Sendable {
     /// und gilt auch ohne gesetzte Persona.
     static func fromLaunchArguments() -> AppEnvironment {
         let configuration = LaunchConfiguration.fromProcessArguments()
+        return make(from: configuration)
+    }
+
+    /// Testbare Variante von `fromLaunchArguments()`. Der Erststart erscheint
+    /// nur ohne jedes `-uitest-*`-Argument oder mit `-uitest-show-onboarding`.
+    static func make(from configuration: LaunchConfiguration) -> AppEnvironment {
+        let showsOnboarding = !configuration.hasUITestArguments || configuration.showOnboarding
         guard let personaID = configuration.personaID else {
-            return AppEnvironment(colorScheme: configuration.colorScheme)
+            return AppEnvironment(colorScheme: configuration.colorScheme, showsOnboarding: showsOnboarding)
         }
         return AppEnvironment(
             clock: configuration.clock ?? SystemClock(),
             isUITesting: true,
             personaID: personaID,
-            colorScheme: configuration.colorScheme
+            colorScheme: configuration.colorScheme,
+            showsOnboarding: showsOnboarding
         )
     }
     #endif

@@ -22,6 +22,17 @@ enum DayKey {
         return "\(padded(year, to: 4))-\(padded(month, to: 2))-\(padded(day, to: 2))"
     }
 
+    /// Anfang des Tages zu einem Schlüssel `yyyy-MM-dd` im übergebenen
+    /// Kalender; `nil` bei ungültigem Schlüssel.
+    static func date(from key: String, calendar: Calendar = .current) -> Date? {
+        let parts = key.split(separator: "-")
+        guard parts.count == 3,
+              let year = Int(parts[0]), let month = Int(parts[1]), let day = Int(parts[2]) else {
+            return nil
+        }
+        return calendar.date(from: DateComponents(year: year, month: month, day: day))
+    }
+
     private static func padded(_ value: Int, to width: Int) -> String {
         let digits = String(value)
         guard digits.count < width else { return digits }

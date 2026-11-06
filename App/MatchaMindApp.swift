@@ -5,6 +5,9 @@ import SwiftUI
 struct MatchaMindApp: App {
     private let appEnvironment: AppEnvironment
     private let playerStore: PlayerStore
+    private let reminderCoordinator: ReminderCoordinator
+
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         // Testzugänge (UI-Test-Personas, simuliertes Datum) nur in DEBUG -
@@ -32,12 +35,28 @@ struct MatchaMindApp: App {
         playerStore = store
         GameInstructionsSeenStore.backing = store
         FineLevelStore.backing = store
+
+        // Erinnerungen: ohne Erststart (UI-Tests) nichts beim System eintragen.
+        let calendar = Calendar.autoupdatingCurrent
+        let scheduler: any NotificationScheduling
+        if appEnvironment.showsOnboarding {
+            scheduler = SystemNotificationScheduler(calendar: calendar)
+        } else {
+            scheduler = NoopNotificationScheduler()
+        }
+        reminderCoordinator = ReminderCoordinator(
+            store: store,
+            scheduler: scheduler,
+            clock: appEnvironment.clock,
+            calendar: calendar
+        )
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
                 .environment(\.appEnvironment, appEnvironment)
+                .environment(\.reminderCoordinator, reminderCoordinator)
                 .environment(playerStore)
                 // `colorScheme` ist nur in UI-Tests mit `-uitest-appearance`
                 // gesetzt (siehe `LaunchConfiguration`/`AppEnvironment`).
@@ -45,6 +64,14 @@ struct MatchaMindApp: App {
                 // Systemverhalten greifen - kein Unterschied zum
                 // Release-Build.
                 .preferredColorScheme(appEnvironment.colorScheme)
+                // Erinnerungen neu planen: beim Start und jedes Mal, wenn
+                // die App wieder aktiv wird.
+                .task { await reminderCoordinator.reschedule() }
+                .onChange(of: scenePhase) { _, phase in
+                    if phase == .active {
+                        Task { await reminderCoordinator.reschedule() }
+                    }
+                }
         }
     }
 }

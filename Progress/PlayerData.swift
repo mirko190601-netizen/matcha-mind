@@ -34,6 +34,14 @@ final class PlayerProfile {
     var bonusBlossomWeeks: [String] = []
     var reminderHour: Int?
     var reminderMinute: Int?
+    /// Erststart (Begruessung und Uhrzeit) abgeschlossen. Neue Felder haben
+    /// Standardwerte, damit die Migration leicht bleibt.
+    var onboardingCompleted: Bool = false
+    /// Erinnerung im Profil ausgeschaltet: es wird nichts mehr geplant.
+    var reminderOff: Bool = false
+    /// Termin der einmaligen 17-Uhr-Einladung (ohne gewaehlte Uhrzeit), damit
+    /// nie eine zweite folgt.
+    var invitationDate: Date?
     var adFreePurchasedCache: Bool = false
     var installDate: Date
 

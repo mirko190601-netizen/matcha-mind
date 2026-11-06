@@ -34,6 +34,7 @@ targets:
       - path: Teepause
       - path: Garden
       - path: Settings
+      - path: Notifications
       # String Catalogs (Xcode 15+). XcodeGen kennt keinen eigenen
       # Target-Schluessel "resources" (geprueft im XcodeGen-Quellcode,
       # Sources/ProjectSpec/Target.swift: nur "sources" wird geparst) -
