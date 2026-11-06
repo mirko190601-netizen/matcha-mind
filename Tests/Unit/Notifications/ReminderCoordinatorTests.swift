@@ -39,16 +39,12 @@ final class SpyNotificationScheduler: NotificationScheduling, @unchecked Sendabl
     }
 
     func requestAuthorization(_ mode: ReminderAuthorizationMode) async -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        storedModes.append(mode)
+        lock.withLock { storedModes.append(mode) }
         return true
     }
 
     func replaceAll(with reminders: [PlannedReminder]) async {
-        lock.lock()
-        defer { lock.unlock() }
-        storedPlans.append(reminders)
+        lock.withLock { storedPlans.append(reminders) }
     }
 }
 
