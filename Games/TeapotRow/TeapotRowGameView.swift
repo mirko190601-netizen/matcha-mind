@@ -218,6 +218,7 @@ public struct TeapotRowGameView: View {
         let isCorrect = expectedTaps[tappedCount] == position
         if isCorrect {
             hits += 1
+            GameHaptics.hit()
         } else {
             misses += 1
             roundHadMistake = true

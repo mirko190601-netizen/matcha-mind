@@ -35,6 +35,7 @@ struct MatchaMindApp: App {
         playerStore = store
         GameInstructionsSeenStore.backing = store
         FineLevelStore.backing = store
+        GameHaptics.backing = store
 
         // Erinnerungen: ohne Erststart (UI-Tests) nichts beim System eintragen.
         let calendar = Calendar.autoupdatingCurrent

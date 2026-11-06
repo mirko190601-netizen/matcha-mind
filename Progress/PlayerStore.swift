@@ -35,11 +35,11 @@ final class PlayerStore {
 
     // MARK: - Aufbau
 
-    /// Baut den Container fuer die drei Modelle. `inMemory` fuer UI-Tests;
+    /// Baut den Container fuer die vier Modelle. `inMemory` fuer UI-Tests;
     /// `url` (nur ohne `inMemory`) legt die Datei fuer Tests an einen
     /// bekannten Ort. Ohne beides gilt der Standardort der App.
     static func makeContainer(inMemory: Bool, url: URL? = nil) throws -> ModelContainer {
-        let schema = Schema([PlayerProfile.self, DayRecord.self, GameRecord.self])
+        let schema = Schema([PlayerProfile.self, DayRecord.self, GameRecord.self, ResultRecord.self])
         let configuration: ModelConfiguration
         if inMemory {
             configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
@@ -126,6 +126,17 @@ final class PlayerStore {
         profile.dewDrops += Self.dewPerGame
         profile.dewEarnedTotal += Self.dewPerGame
         gameRecord(for: gameID).lastPlayed = clock.now()
+        // Verlauf: ein Eintrag je Runde. Ohne bekannten Bereich (unbekannte
+        // Spiel-ID) gibt es nichts zuzuordnen.
+        if let area = GameCatalog.allGames.first(where: { $0.id == gameID })?.area {
+            context.insert(ResultRecord(
+                dayKey: todayKey,
+                gameID: gameID,
+                area: area,
+                hits: result.hits,
+                misses: result.misses
+            ))
+        }
         save()
     }
 
@@ -215,6 +226,55 @@ final class PlayerStore {
 
     private func completedDayKeys() -> Set<String> {
         Set(allDayRecords().filter { $0.teaBreakCompleted }.map(\.dayKey))
+    }
+
+    // MARK: - Verlauf
+
+    /// Die letzten sechs ISO-Wochen (aktuelle zuerst) mit aktiven Tagen.
+    var historyWeeks: [HistoryWeek] {
+        _ = revision
+        return HistoryCalculator.weeks(
+            now: clock.now(),
+            completedDayKeys: completedDayKeys(),
+            calendar: calendar
+        )
+    }
+
+    /// Genauigkeit je Bereich ueber die letzten vier Wochen; Bereiche ohne
+    /// Versuche fehlen.
+    var areaAccuracy: [AreaAccuracy] {
+        _ = revision
+        var summaries: [ResultSummary] = []
+        for record in allResultRecords() {
+            summaries.append(ResultSummary(
+                dayKey: record.dayKey,
+                areaRaw: record.areaRaw,
+                hits: record.hits,
+                misses: record.misses
+            ))
+        }
+        return HistoryCalculator.accuracy(results: summaries, now: clock.now(), calendar: calendar)
+    }
+
+    /// Anzahl gespeicherter Ergebnisse (Runden).
+    var resultCount: Int {
+        _ = revision
+        return allResultRecords().count
+    }
+
+    // MARK: - Ton und Haptik
+
+    var soundEnabled: Bool { _ = revision; return profile.soundEnabled }
+    var hapticsEnabled: Bool { _ = revision; return profile.hapticsEnabled }
+
+    func setSoundEnabled(_ enabled: Bool) {
+        profile.soundEnabled = enabled
+        save()
+    }
+
+    func setHapticsEnabled(_ enabled: Bool) {
+        profile.hapticsEnabled = enabled
+        save()
     }
 
     // MARK: - Spiele
@@ -308,6 +368,10 @@ final class PlayerStore {
 
     private func allDayRecords() -> [DayRecord] {
         (try? context.fetch(FetchDescriptor<DayRecord>())) ?? []
+    }
+
+    private func allResultRecords() -> [ResultRecord] {
+        (try? context.fetch(FetchDescriptor<ResultRecord>())) ?? []
     }
 
     private func dayRecord(for key: String) -> DayRecord {

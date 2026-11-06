@@ -278,6 +278,7 @@ public struct FireflyPondGameView: View {
 
         if case .firefly(let color) = currentObject, color == currentTargetColor {
             hits += 1
+            GameHaptics.hit()
             flashIsGood = true
         } else {
             misses += 1

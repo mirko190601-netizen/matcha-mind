@@ -191,6 +191,7 @@ public struct BambooMathGameView: View {
         let isCorrect = entered == currentChain.finalResult
         if isCorrect {
             hits += 1
+            GameHaptics.hit()
         } else {
             misses += 1
         }

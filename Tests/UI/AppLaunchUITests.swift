@@ -9,7 +9,7 @@ import XCTest
 /// `App/LaunchConfiguration.swift`, nur im DEBUG-Build aktiv).
 final class AppLaunchUITests: XCTestCase {
     /// Tab-Titel und der eindeutige Beschreibungstext des zugehoerigen
-    /// Platzhalter-Screens (siehe `App/*PlaceholderView.swift`). Wird von
+    /// Platzhalter-Screens (siehe `Progress/HistoryView.swift`, `Settings/ProfileView.swift`). Wird von
     /// beiden Testmethoden dieser Klasse verwendet, damit die Liste nicht
     /// doppelt gepflegt werden muss.
     private var tabs: [(title: String, bodyText: String)] {
@@ -27,11 +27,11 @@ final class AppLaunchUITests: XCTestCase {
             ),
             (
                 String(localized: "tab.history.title", defaultValue: "Verlauf"),
-                String(localized: "placeholder.history.body", defaultValue: "Hier siehst du bald deinen Verlauf.")
+                String(localized: "history.weeks.title", defaultValue: "Deine letzten Wochen")
             ),
             (
                 String(localized: "tab.profile.title", defaultValue: "Profil"),
-                String(localized: "placeholder.profile.body", defaultValue: "Hier findest du bald dein Profil.")
+                String(localized: "profile.intro", defaultValue: "Hier stellst du alles so ein, wie es dir gefällt.")
             ),
         ]
     }
@@ -149,7 +149,7 @@ final class AppLaunchUITests: XCTestCase {
         // hinter `.sidebarAdaptable`). Stattdessen wird direkt das
         // eigentliche Gate geprueft: Nach dem Tippen auf einen Tab muss der
         // zugehoerige Platzhalter-Screen sichtbar sein - erkennbar an
-        // seinem eindeutigen Beschreibungstext (siehe `App/*PlaceholderView.swift`).
+        // seinem eindeutigen Beschreibungstext (siehe `Progress/HistoryView.swift`, `Settings/ProfileView.swift`).
         for (index, tab) in tabs.enumerated() {
             // Auf `.button` eingeschraenkt statt `.any`: sowohl der
             // Tab-Leisten-Button (iPhone) als auch die Seitenleisten-Zeile

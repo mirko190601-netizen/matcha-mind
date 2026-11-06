@@ -16,12 +16,24 @@ enum ReminderAuthorizationMode: Equatable, Sendable {
     case standard
 }
 
+/// Wie das System Mitteilungen gerade behandelt (fuer den Hinweis im Profil).
+enum ReminderAuthorizationState: Equatable, Sendable {
+    /// Noch keine Entscheidung (auch vorlaeufige Erlaubnis zaehlt hier nicht als Ablehnung).
+    case notDetermined
+    /// Mitteilungen duerfen zugestellt werden.
+    case allowed
+    /// In den iOS-Einstellungen ausgeschaltet.
+    case denied
+}
+
 protocol NotificationScheduling: Sendable {
     /// Fragt die Erlaubnis an; liefert, ob Mitteilungen zugestellt werden duerfen.
     @discardableResult
     func requestAuthorization(_ mode: ReminderAuthorizationMode) async -> Bool
     /// Ersetzt alle offenen Mitteilungen durch genau diese.
     func replaceAll(with reminders: [PlannedReminder]) async
+    /// Aktueller Berechtigungsstatus, ohne eine Abfrage auszuloesen.
+    func authorizationState() async -> ReminderAuthorizationState
 }
 
 /// Wird genutzt, wenn der Erststart uebersprungen ist (UI-Tests), damit dort
@@ -29,6 +41,7 @@ protocol NotificationScheduling: Sendable {
 struct NoopNotificationScheduler: NotificationScheduling {
     func requestAuthorization(_ mode: ReminderAuthorizationMode) async -> Bool { false }
     func replaceAll(with reminders: [PlannedReminder]) async {}
+    func authorizationState() async -> ReminderAuthorizationState { .notDetermined }
 }
 
 /// Echte Umsetzung ueber `UNUserNotificationCenter`. Das Center wird in jeder
@@ -51,6 +64,18 @@ struct SystemNotificationScheduler: NotificationScheduling {
             return try await center.requestAuthorization(options: options)
         } catch {
             return false
+        }
+    }
+
+    func authorizationState() async -> ReminderAuthorizationState {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        switch settings.authorizationStatus {
+        case .denied:
+            return .denied
+        case .notDetermined:
+            return .notDetermined
+        default:
+            return .allowed
         }
     }
 

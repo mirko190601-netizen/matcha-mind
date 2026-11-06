@@ -42,6 +42,10 @@ final class PlayerProfile {
     /// Termin der einmaligen 17-Uhr-Einladung (ohne gewaehlte Uhrzeit), damit
     /// nie eine zweite folgt.
     var invitationDate: Date?
+    /// Ton und Haptik (Profil). Klaenge gibt es noch nicht; der Schalter
+    /// wird nur gespeichert. Haptik wirkt ueber `GameHaptics`.
+    var soundEnabled: Bool = true
+    var hapticsEnabled: Bool = true
     var adFreePurchasedCache: Bool = false
     var installDate: Date
 
@@ -95,5 +99,26 @@ final class GameRecord {
 
     init(gameID: String) {
         self.gameID = gameID
+    }
+}
+
+/// Ein Eintrag je beendeter Spielrunde (Grundlage des Verlaufs). Der Bereich
+/// wird als Text (`GameArea.rawValue`) gespeichert, damit das Schema
+/// unabhaengig von spaeteren Enum-Erweiterungen bleibt.
+@Model
+final class ResultRecord {
+    /// Tagesschluessel `yyyy-MM-dd` (siehe `DayKey`).
+    var dayKey: String
+    var gameID: String
+    var areaRaw: String
+    var hits: Int
+    var misses: Int
+
+    init(dayKey: String, gameID: String, area: GameArea, hits: Int, misses: Int) {
+        self.dayKey = dayKey
+        self.gameID = gameID
+        self.areaRaw = area.rawValue
+        self.hits = hits
+        self.misses = misses
     }
 }

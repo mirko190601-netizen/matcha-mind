@@ -222,6 +222,7 @@ public struct MosaicBedGameView: View {
             let isCorrect = next == puzzle.solution[row][col]
             if isCorrect {
                 hits += 1
+                GameHaptics.hit()
             } else {
                 misses += 1
             }

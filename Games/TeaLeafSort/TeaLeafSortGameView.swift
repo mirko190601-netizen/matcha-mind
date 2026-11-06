@@ -250,6 +250,7 @@ public struct TeaLeafSortGameView: View {
         let isCorrect = index == currentTargetPileIndex
         if isCorrect {
             hits += 1
+            GameHaptics.hit()
             consecutiveCorrect += 1
         } else {
             misses += 1

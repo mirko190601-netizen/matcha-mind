@@ -5,6 +5,7 @@
 import Foundation
 import SwiftData
 
+#if DEBUG
 extension PlayerStore {
     /// Speicher nur im Arbeitsspeicher, optional mit gesetzter Stufe.
     static func preview(level: TeaLevel = .sencha) -> PlayerStore {
@@ -18,3 +19,4 @@ extension PlayerStore {
         return store
     }
 }
+#endif

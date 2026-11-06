@@ -7,6 +7,7 @@ final class SpyNotificationScheduler: NotificationScheduling, @unchecked Sendabl
     private let lock = NSLock()
     private var storedModes: [ReminderAuthorizationMode] = []
     private var storedPlans: [[PlannedReminder]] = []
+    private var storedState: ReminderAuthorizationState = .notDetermined
 
     var authorizationModes: [ReminderAuthorizationMode] {
         lock.lock()
@@ -18,6 +19,23 @@ final class SpyNotificationScheduler: NotificationScheduling, @unchecked Sendabl
         lock.lock()
         defer { lock.unlock() }
         return storedPlans
+    }
+
+    var state: ReminderAuthorizationState {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return storedState
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            storedState = newValue
+        }
+    }
+
+    func authorizationState() async -> ReminderAuthorizationState {
+        state
     }
 
     func requestAuthorization(_ mode: ReminderAuthorizationMode) async -> Bool {

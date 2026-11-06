@@ -727,28 +727,6 @@
         }
       }
     },
-    "placeholder.history.body": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier siehst du bald deinen Verlauf."
-          }
-        }
-      }
-    },
-    "placeholder.profile.body": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier findest du bald dein Profil."
-          }
-        }
-      }
-    },
     "tab.games.title": {
       "extractionState": "manual",
       "localizations": {
@@ -2109,6 +2087,468 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kirschbaum"
+          }
+        }
+      }
+    },
+    "history.weeks.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine letzten Wochen"
+          }
+        }
+      }
+    },
+    "history.week.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woche ab %@"
+          }
+        }
+      }
+    },
+    "history.week.a11y.quiet": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: eine ruhige Woche"
+          }
+        }
+      }
+    },
+    "history.week.a11y.active": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: Tage mit Teepause: %lld"
+          }
+        }
+      }
+    },
+    "history.accuracy.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treffer nach Bereich"
+          }
+        }
+      }
+    },
+    "history.accuracy.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die letzten 4 Wochen"
+          }
+        }
+      }
+    },
+    "history.accuracy.a11y": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld Prozent Treffer"
+          }
+        }
+      }
+    },
+    "history.percent": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %%"
+          }
+        }
+      }
+    },
+    "history.empty.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier wächst dein Verlauf, sobald du gespielt hast."
+          }
+        }
+      }
+    },
+    "area.spatialMemory": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Räumliches Gedächtnis"
+          }
+        }
+      }
+    },
+    "area.focus": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aufmerksamkeit"
+          }
+        }
+      }
+    },
+    "area.logic": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logik"
+          }
+        }
+      }
+    },
+    "area.flexibility": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flexibilität"
+          }
+        }
+      }
+    },
+    "area.mentalMath": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopfrechnen"
+          }
+        }
+      }
+    },
+    "area.workingMemory": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arbeitsgedächtnis"
+          }
+        }
+      }
+    },
+    "area.impulseControl": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impulskontrolle"
+          }
+        }
+      }
+    },
+    "area.spatialReasoning": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Räumliches Denken"
+          }
+        }
+      }
+    },
+    "area.planning": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planen"
+          }
+        }
+      }
+    },
+    "area.language": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache"
+          }
+        }
+      }
+    },
+    "area.dualWorkingMemory": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doppeltes Merken"
+          }
+        }
+      }
+    },
+    "area.reasoning": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlussfolgern"
+          }
+        }
+      }
+    },
+    "area.dividedAttention": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geteilte Aufmerksamkeit"
+          }
+        }
+      }
+    },
+    "area.patternRecognition": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muster erkennen"
+          }
+        }
+      }
+    },
+    "profile.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier stellst du alles so ein, wie es dir gefällt."
+          }
+        }
+      }
+    },
+    "profile.autoAdvance.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir schlagen dir die nächste Stufe vor. Du entscheidest."
+          }
+        }
+      }
+    },
+    "profile.reminder.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerung"
+          }
+        }
+      }
+    },
+    "profile.reminder.change": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ändern"
+          }
+        }
+      }
+    },
+    "profile.reminder.off": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus"
+          }
+        }
+      }
+    },
+    "profile.reminder.status.off": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus"
+          }
+        }
+      }
+    },
+    "profile.reminder.status.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Uhrzeit"
+          }
+        }
+      }
+    },
+    "profile.reminder.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen sind für Matcha Mind ausgeschaltet. In den iOS-Einstellungen kannst du sie wieder erlauben."
+          }
+        }
+      }
+    },
+    "profile.settings.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS-Einstellungen öffnen"
+          }
+        }
+      }
+    },
+    "profile.sound.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton"
+          }
+        }
+      }
+    },
+    "profile.haptics.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haptik"
+          }
+        }
+      }
+    },
+    "profile.language.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache"
+          }
+        }
+      }
+    },
+    "profile.language.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sprache stellst du in den iOS-Einstellungen ein."
+          }
+        }
+      }
+    },
+    "profile.privacy.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenschutz"
+          }
+        }
+      }
+    },
+    "profile.purchase.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kauf und Wiederherstellen"
+          }
+        }
+      }
+    },
+    "profile.purchase.soon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bald verfügbar"
+          }
+        }
+      }
+    },
+    "profile.reminder.sheet.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wann magst du erinnert werden?"
+          }
+        }
+      }
+    },
+    "profile.reminder.sheet.save": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speichern"
+          }
+        }
+      }
+    },
+    "profile.reminder.sheet.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
           }
         }
       }

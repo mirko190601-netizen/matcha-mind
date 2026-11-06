@@ -3,8 +3,8 @@ import SwiftUI
 /// Haupt-Navigation der App: vier Bereiche in einer `TabView`.
 /// `.sidebarAdaptable` zeigt auf dem iPhone eine Tab-Leiste, auf dem iPad eine
 /// Seitenleiste (design/designsystem-README.md, Abschnitt "iPad").
-/// Jeder Tab zeigt vorerst nur einen Platzhalter-Screen; die echten Inhalte
-/// folgen in späteren Blöcken.
+/// Garten, Spiele, Verlauf (`Progress/HistoryView.swift`) und Profil
+/// (`Settings/ProfileView.swift`) zeigen ihre echten Inhalte.
 struct ContentView: View {
     var body: some View {
         TabView {
@@ -17,11 +17,11 @@ struct ContentView: View {
             }
             .accessibilityIdentifier("tab.games")
             Tab(String(localized: "tab.history.title", defaultValue: "Verlauf"), systemImage: "clock.arrow.circlepath") {
-                HistoryPlaceholderView()
+                HistoryView()
             }
             .accessibilityIdentifier("tab.history")
             Tab(String(localized: "tab.profile.title", defaultValue: "Profil"), systemImage: "person.crop.circle.fill") {
-                ProfilePlaceholderView()
+                ProfileView()
             }
             .accessibilityIdentifier("tab.profile")
         }

@@ -67,6 +67,11 @@ final class ReminderCoordinator {
         await reschedule()
     }
 
+    /// Profil: aktueller Berechtigungsstatus fuer den Ablehnungs-Hinweis.
+    func authorizationState() async -> ReminderAuthorizationState {
+        await scheduler.authorizationState()
+    }
+
     /// Profil: Erinnerung ausschalten (plant nichts mehr, auch keine Einladung).
     func turnOff() async {
         store.setReminderOff(true)
