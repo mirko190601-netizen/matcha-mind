@@ -353,6 +353,15 @@ final class PlayerStoreTests: XCTestCase {
             store.completeTeaBreak()
             store.markInstructionsSeen(gameID: "teapot-row")
             store.saveFineLevel(gameID: "teapot-row", level: 4)
+            // Paket F: Tau, Deko, Erinnerung, Erststart, Ton, Haptik, Ergebnisse.
+            store.recordGameResult(gameID: "firefly-pond", result: GameResult(hits: 9, misses: 1, duration: 60))
+            store.recordGameResult(gameID: "bamboo-math", result: GameResult(hits: 4, misses: 4, duration: 60))
+            XCTAssertTrue(store.purchaseDecoration(id: "stepping-stones")) // 36 Tau - 24
+            store.setReminderTime(ReminderTime(hour: 7, minute: 45))
+            store.setReminderOff(true)
+            store.completeOnboarding()
+            store.setSoundEnabled(false)
+            store.setHapticsEnabled(false)
         }
 
         let reopenedContainer = try PlayerStore.makeContainer(inMemory: false, url: storeURL)
@@ -366,5 +375,19 @@ final class PlayerStoreTests: XCTestCase {
         XCTAssertTrue(reopened.instructionsSeen(gameID: "teapot-row"))
         XCTAssertEqual(reopened.fineLevel(gameID: "teapot-row"), 4)
         XCTAssertEqual(reopened.lastPlayed(gameID: "teapot-row"), clock.now())
+
+        // Paket F: die neuen Felder ueberleben den Neustart ebenfalls.
+        XCTAssertEqual(reopened.dewEarnedTotal, 36)
+        XCTAssertEqual(reopened.dewDrops, 12)
+        XCTAssertEqual(reopened.ownedDecorationIDs, ["stepping-stones"])
+        XCTAssertEqual(reopened.reminderTime, ReminderTime(hour: 7, minute: 45))
+        XCTAssertTrue(reopened.reminderOff)
+        XCTAssertTrue(reopened.onboardingCompleted)
+        XCTAssertFalse(reopened.soundEnabled)
+        XCTAssertFalse(reopened.hapticsEnabled)
+        XCTAssertEqual(reopened.resultCount, 3)
+        XCTAssertEqual(reopened.areaAccuracy.count, 3, "Je ein Eintrag pro gespieltem Bereich")
+        XCTAssertTrue(reopened.instructionsSeen(gameID: "teapot-row"))
+        XCTAssertFalse(reopened.instructionsSeen(gameID: "firefly-pond"))
     }
 }

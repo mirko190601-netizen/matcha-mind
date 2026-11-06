@@ -63,4 +63,16 @@ enum TeaBreakPlanner {
         }
         return chosen.map(\.gameID)
     }
+
+    #if DEBUG
+    /// Feste Auswahl fuer UI-Tests (nur DEBUG): gilt nur, wenn `forced` nicht leer ist, keine
+    /// Kennung doppelt vorkommt und jede spielbar ist. Sonst `nil` (dann gilt
+    /// die normale Auswahl). Die Reihenfolge von `forced` bleibt erhalten.
+    static func forcedPlan(_ forced: [String], playable: [String]) -> [String]? {
+        guard !forced.isEmpty,
+              Set(forced).count == forced.count,
+              forced.allSatisfy({ playable.contains($0) }) else { return nil }
+        return forced
+    }
+    #endif
 }

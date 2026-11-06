@@ -31,6 +31,17 @@ struct MatchaMindApp: App {
             }
             container = fallback
         }
+        // UI-Test-Spielstand (nur DEBUG, nur mit Persona und damit nur im
+        // Arbeitsspeicher): muss vor dem `PlayerStore` ins Profil geschrieben werden.
+        #if DEBUG
+        if appEnvironment.isUITesting,
+           let seed = LaunchConfiguration.fromProcessArguments().effectiveSeed {
+            seed.populate(container: container, now: appEnvironment.clock.now(), calendar: .autoupdatingCurrent)
+        }
+        #endif
+        #if DEBUG
+        GameRound.overrideSeconds = LaunchConfiguration.fromProcessArguments().effectiveRoundSeconds
+        #endif
         let store = PlayerStore(container: container, clock: appEnvironment.clock)
         playerStore = store
         GameInstructionsSeenStore.backing = store

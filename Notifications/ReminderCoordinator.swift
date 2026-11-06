@@ -15,6 +15,7 @@ final class ReminderCoordinator {
     private let scheduler: any NotificationScheduling
     private let clock: AppClock
     private let calendar: Calendar
+    private var lastRun: Task<Void, Never>?
 
     init(
         store: PlayerStore,
@@ -28,9 +29,22 @@ final class ReminderCoordinator {
         self.calendar = calendar
     }
 
-    /// Plant alle Mitteilungen neu. Vor Abschluss des Erststarts passiert
-    /// nichts (es gibt noch keine Entscheidung und keine Abfrage).
+    /// Plant alle Mitteilungen neu. Die Laeufe folgen strikt nacheinander:
+    /// `.task`, Szenenwechsel und Teepause koennen gleichzeitig ausloesen, und
+    /// ein aelterer Plan darf keinen Eintrag des neueren ueberschreiben.
     func reschedule() async {
+        let previous = lastRun
+        let run = Task {
+            await previous?.value
+            await performReschedule()
+        }
+        lastRun = run
+        await run.value
+    }
+
+    /// Vor Abschluss des Erststarts passiert nichts (es gibt noch keine
+    /// Entscheidung und keine Abfrage).
+    private func performReschedule() async {
         guard store.onboardingCompleted else { return }
         if store.reminderTime == nil, !store.reminderOff {
             // Keine Uhrzeit: vorlaeufige Erlaubnis, damit die Einladung ankommt.

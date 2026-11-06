@@ -27,4 +27,22 @@ final class AppEnvironmentTests: XCTestCase {
         XCTAssertTrue(environment.isUITesting)
         XCTAssertEqual(environment.personaID, "lena")
     }
+
+    #if DEBUG
+    func testDefaultEnvironmentHasNoForcedTeaBreakGames() {
+        XCTAssertEqual(AppEnvironment().forcedTeaBreakGameIDs, [])
+    }
+
+    func testForcedTeaBreakGamesComeFromLaunchArgumentsOnlyWithPersona() {
+        let withPersona = AppEnvironment.make(from: LaunchConfiguration.makeConfiguration(
+            arguments: ["App", "-uitest-persona", "tea", "-uitest-teabreak-games", "teapot-row,bamboo-math"]
+        ))
+        XCTAssertEqual(withPersona.forcedTeaBreakGameIDs, ["teapot-row", "bamboo-math"])
+
+        let withoutPersona = AppEnvironment.make(from: LaunchConfiguration.makeConfiguration(
+            arguments: ["App", "-uitest-teabreak-games", "teapot-row,bamboo-math"]
+        ))
+        XCTAssertEqual(withoutPersona.forcedTeaBreakGameIDs, [])
+    }
+    #endif
 }

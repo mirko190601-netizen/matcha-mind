@@ -31,6 +31,11 @@ struct AppEnvironment: Sendable {
     /// Im Release immer `true`; in DEBUG-UI-Tests aus (siehe
     /// `fromLaunchArguments()`), damit bestehende Abläufe unverändert bleiben.
     let showsOnboarding: Bool
+    #if DEBUG
+    /// Feste Spiele der Teepause (nur DEBUG-UI-Tests, damit der Ablauf nicht vom
+    /// Zufall abhaengt). Leer = normale Auswahl durch `TeaBreakPlanner`.
+    var forcedTeaBreakGameIDs: [String] = []
+    #endif
 
     init(
         clock: AppClock = SystemClock(),
@@ -64,13 +69,15 @@ struct AppEnvironment: Sendable {
         guard let personaID = configuration.personaID else {
             return AppEnvironment(colorScheme: configuration.colorScheme, showsOnboarding: showsOnboarding)
         }
-        return AppEnvironment(
+        var environment = AppEnvironment(
             clock: configuration.clock ?? SystemClock(),
             isUITesting: true,
             personaID: personaID,
             colorScheme: configuration.colorScheme,
             showsOnboarding: showsOnboarding
         )
+        environment.forcedTeaBreakGameIDs = configuration.effectiveTeaBreakGameIDs
+        return environment
     }
     #endif
 }

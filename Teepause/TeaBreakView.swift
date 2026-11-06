@@ -11,6 +11,9 @@ import SwiftUI
 struct TeaBreakView: View {
     @Environment(PlayerStore.self) private var playerStore
     @Environment(\.reminderCoordinator) private var reminders
+    #if DEBUG
+    @Environment(\.appEnvironment) private var appEnvironment
+    #endif
 
     /// Schliesst die Teepause (Rueckkehr in den Garten).
     let onClose: () -> Void
@@ -188,7 +191,16 @@ struct TeaBreakView: View {
     // MARK: - Planung
 
     private func makePlan() -> [String] {
-        let candidates = GameCatalog.playableGames(for: playerStore.level).map { entry in
+        let playable = GameCatalog.playableGames(for: playerStore.level)
+        #if DEBUG
+        if let forced = TeaBreakPlanner.forcedPlan(
+            appEnvironment.forcedTeaBreakGameIDs,
+            playable: playable.map(\.id)
+        ) {
+            return forced
+        }
+        #endif
+        let candidates = playable.map { entry in
             TeaBreakCandidate(
                 gameID: entry.id,
                 area: entry.area,

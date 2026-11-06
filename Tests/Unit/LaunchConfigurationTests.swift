@@ -71,6 +71,76 @@ final class LaunchConfigurationTests: XCTestCase {
 
         XCTAssertNil(configuration.gameLevel)
     }
+
+    // MARK: - Seed und feste Teepause-Spiele
+
+    func testParsesSeedForEachValidValue() {
+        for (argument, expected) in [("promotion-oolong", UITestSeed.promotionOolong), ("promotion-matcha", .promotionMatcha)] {
+            let configuration = LaunchConfiguration.makeConfiguration(
+                arguments: ["AppName", "-uitest-persona", "tea", "-uitest-seed", argument]
+            )
+            XCTAssertEqual(configuration.seed, expected)
+            XCTAssertEqual(configuration.effectiveSeed, expected)
+        }
+    }
+
+    func testUnknownOrMissingSeedYieldsNil() {
+        XCTAssertNil(LaunchConfiguration.makeConfiguration(arguments: ["AppName", "-uitest-seed", "other"]).seed)
+        XCTAssertNil(LaunchConfiguration.makeConfiguration(arguments: ["AppName", "-uitest-seed"]).seed)
+        XCTAssertNil(LaunchConfiguration.makeConfiguration(arguments: ["AppName"]).seed)
+    }
+
+    func testSeedIsOnlyEffectiveWithPersona() {
+        let configuration = LaunchConfiguration.makeConfiguration(
+            arguments: ["AppName", "-uitest-seed", "promotion-oolong"]
+        )
+
+        XCTAssertEqual(configuration.seed, .promotionOolong)
+        XCTAssertNil(configuration.effectiveSeed, "Ohne Persona waere der Speicher dateibasiert")
+    }
+
+    func testParsesTeaBreakGamesAsOrderedList() {
+        let configuration = LaunchConfiguration.makeConfiguration(
+            arguments: ["AppName", "-uitest-persona", "tea", "-uitest-teabreak-games", "teapot-row, firefly-pond,bamboo-math"]
+        )
+
+        XCTAssertEqual(configuration.teaBreakGameIDs, ["teapot-row", "firefly-pond", "bamboo-math"])
+        XCTAssertEqual(configuration.effectiveTeaBreakGameIDs, ["teapot-row", "firefly-pond", "bamboo-math"])
+    }
+
+    func testTeaBreakGamesAreEmptyWithoutArgumentAndIgnoredWithoutPersona() {
+        XCTAssertEqual(LaunchConfiguration.makeConfiguration(arguments: ["AppName"]).teaBreakGameIDs, [])
+
+        let withoutPersona = LaunchConfiguration.makeConfiguration(
+            arguments: ["AppName", "-uitest-teabreak-games", "teapot-row"]
+        )
+        XCTAssertEqual(withoutPersona.teaBreakGameIDs, ["teapot-row"])
+        XCTAssertEqual(withoutPersona.effectiveTeaBreakGameIDs, [])
+    }
+
+    // MARK: - Rundendauer
+
+    func testParsesRoundSecondsOnlyForPositiveNumbers() {
+        func parse(_ value: String) -> TimeInterval? {
+            LaunchConfiguration.makeConfiguration(
+                arguments: ["AppName", "-uitest-persona", "tea", "-uitest-round-seconds", value]
+            ).effectiveRoundSeconds
+        }
+        XCTAssertEqual(parse("10"), 10)
+        XCTAssertEqual(parse("2.5"), 2.5)
+        XCTAssertNil(parse("0"))
+        XCTAssertNil(parse("-3"))
+        XCTAssertNil(parse("abc"))
+    }
+
+    func testRoundSecondsAreIgnoredWithoutPersonaAndWithoutArgument() {
+        let withoutPersona = LaunchConfiguration.makeConfiguration(
+            arguments: ["AppName", "-uitest-round-seconds", "10"]
+        )
+        XCTAssertEqual(withoutPersona.roundSeconds, 10)
+        XCTAssertNil(withoutPersona.effectiveRoundSeconds)
+        XCTAssertNil(LaunchConfiguration.makeConfiguration(arguments: ["AppName"]).roundSeconds)
+    }
 }
 
 #endif

@@ -22,7 +22,7 @@ public struct MosaicBedGameView: View {
     /// Zielspieldauer einer Runde (Abschnitt 6: "Runde 60-90 s"); bei
     /// einem Logikrätsel wie diesem eher eine Richtgröße dafür, wie viele
     /// Rätsel hintereinander folgen, als eine harte Grenze.
-    private let roundDuration: TimeInterval = 75
+    private var roundDuration: TimeInterval { GameRound.duration }
 
     @State private var session = GameSession()
 

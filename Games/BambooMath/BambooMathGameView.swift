@@ -27,7 +27,7 @@ public struct BambooMathGameView: View {
     private let onFinished: () -> Void
 
     /// Zielspieldauer einer Runde (Abschnitt 6: "Runde 60-90 s").
-    private let roundDuration: TimeInterval = 75
+    private var roundDuration: TimeInterval { GameRound.duration }
     /// Maximale Ziffern einer eingegebenen Antwort (Obergrenze Matcha: 100).
     private static let maxAnswerDigits = 3
 

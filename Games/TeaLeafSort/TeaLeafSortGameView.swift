@@ -28,7 +28,7 @@ public struct TeaLeafSortGameView: View {
     private let onFinished: () -> Void
 
     /// Zielspieldauer einer Runde (Abschnitt 6: "Runde 60-90 s").
-    private let roundDuration: TimeInterval = 75
+    private var roundDuration: TimeInterval { GameRound.duration }
 
     /// Farbtoken je Ablagen-/Wert-Index (Rolle "Spielwelt",
     /// `design/designsystem-tokens.json`), Form (SF-Symbol) ist zusätzlich

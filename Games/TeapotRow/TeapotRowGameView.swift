@@ -23,7 +23,7 @@ public struct TeapotRowGameView: View {
     private let onFinished: () -> Void
 
     /// Zielspieldauer einer Runde (Abschnitt 6: "Runde 60-90 s").
-    private let roundDuration: TimeInterval = 75
+    private var roundDuration: TimeInterval { GameRound.duration }
 
     @State private var session = GameSession()
     @State private var fineLevelTracker: FineLevelTracker

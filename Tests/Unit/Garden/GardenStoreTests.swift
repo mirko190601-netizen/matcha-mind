@@ -159,4 +159,38 @@ final class GardenStoreTests: XCTestCase {
         XCTAssertEqual(store.bonusBlossomCount, 1)
         XCTAssertEqual(store.activeDaysThisWeek, 0)
     }
+
+    // MARK: - Luecken aus Paket F
+
+    func testTwoPurchasesUseTheDewCumulatively() throws {
+        let store = try makeStore(clock: makeClock())
+        earn(store, games: 5) // 60 Tau = 24 + 36
+
+        XCTAssertTrue(store.purchaseDecoration(id: "stepping-stones"))
+        XCTAssertEqual(store.dewDrops, 36)
+        XCTAssertTrue(store.purchaseDecoration(id: "stone-lantern"))
+        XCTAssertEqual(store.dewDrops, 0)
+        XCTAssertEqual(store.ownedDecorationIDs, ["stepping-stones", "stone-lantern"])
+        XCTAssertFalse(store.purchaseDecoration(id: "bonsai"), "Kein Tau mehr uebrig")
+    }
+
+    func testEarningContinuesAfterPurchase() throws {
+        let store = try makeStore(clock: makeClock())
+        earn(store, games: 2)
+        XCTAssertTrue(store.purchaseDecoration(id: "stepping-stones"))
+
+        earn(store, games: 1)
+
+        XCTAssertEqual(store.dewDrops, 12)
+        XCTAssertEqual(store.dewEarnedTotal, 36)
+    }
+
+    func testThreeGamesReachGardenGrowthStageOne() throws {
+        let store = try makeStore(clock: makeClock())
+        XCTAssertEqual(GardenGrowth.stage(dewEarnedTotal: store.dewEarnedTotal), 0)
+
+        earn(store, games: 3) // eine Teepause: 3 x 12 = 36 Tau
+
+        XCTAssertEqual(GardenGrowth.stage(dewEarnedTotal: store.dewEarnedTotal), 1)
+    }
 }

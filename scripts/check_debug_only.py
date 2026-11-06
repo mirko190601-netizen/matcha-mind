@@ -31,11 +31,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Nur der echte App-Quellcode, nicht Tests/ oder scripts/ selbst - sonst
 # waere z. B. diese Docstring-Erwaehnung der Muster ein falscher Treffer.
-SOURCE_DIRS = ["App", "DesignSystem"]
+SOURCE_DIRS = ["App", "DesignSystem", "Progress", "Teepause", "Games"]
 
 SENSITIVE_PATTERNS = [
     re.compile(r"-uitest-persona"),
     re.compile(r"-uitest-date"),
+    re.compile(r"-uitest-seed"),
+    re.compile(r"-uitest-teabreak-games"),
+    re.compile(r"-uitest-round-seconds"),
     re.compile(r"ProcessInfo\.processInfo\.arguments"),
 ]
 

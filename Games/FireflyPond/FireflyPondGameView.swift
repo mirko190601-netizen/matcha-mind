@@ -29,8 +29,8 @@ public struct FireflyPondGameView: View {
     /// `gapDuration` eine Rundendauer innerhalb der katalogweiten Vorgabe
     /// "Runde 60-90 s" (Abschnitt 6).
     private static let totalSpawnCount = 40
-    private let displayDuration: TimeInterval = 1.1
-    private let gapDuration: TimeInterval = 0.5
+    private var displayDuration: TimeInterval { 1.1 * GameRound.timeScale }
+    private var gapDuration: TimeInterval { 0.5 * GameRound.timeScale }
 
     @State private var session = GameSession()
 

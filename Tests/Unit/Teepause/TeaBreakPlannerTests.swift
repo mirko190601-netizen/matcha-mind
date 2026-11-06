@@ -137,4 +137,26 @@ final class TeaBreakPlannerTests: XCTestCase {
 
         XCTAssertGreaterThan(results.count, 1, "Die Auswahl unter gleichwertigen Spielen sollte variieren")
     }
+
+    // MARK: - Luecken aus Paket F (Anzahl 0, feste Auswahl fuer UI-Tests)
+
+    func testCountZeroOrNegativeReturnsEmptyPlan() {
+        XCTAssertEqual(plan(fiveFreshCandidates(), count: 0), [])
+        XCTAssertEqual(plan(fiveFreshCandidates(), count: -2), [])
+    }
+
+    #if DEBUG
+    func testForcedPlanKeepsOrderWhenAllGamesArePlayable() {
+        XCTAssertEqual(
+            TeaBreakPlanner.forcedPlan(["c", "a", "b"], playable: ["a", "b", "c", "d"]),
+            ["c", "a", "b"]
+        )
+    }
+
+    func testForcedPlanIsNilForEmptyDuplicateOrUnplayableIDs() {
+        XCTAssertNil(TeaBreakPlanner.forcedPlan([], playable: ["a", "b"]))
+        XCTAssertNil(TeaBreakPlanner.forcedPlan(["a", "a"], playable: ["a", "b"]))
+        XCTAssertNil(TeaBreakPlanner.forcedPlan(["a", "z"], playable: ["a", "b"]))
+    }
+    #endif
 }

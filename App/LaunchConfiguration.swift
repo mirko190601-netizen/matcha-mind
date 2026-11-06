@@ -29,6 +29,15 @@ import SwiftUI
 ///   ohne dieses Argument bleibt es bei `.sencha`, wie im Release-Build.
 /// - `-uitest-show-onboarding`: zeigt den Erststart (Begrüßung, Uhrzeit)
 ///   trotz UI-Test. Sonst überspringt ihn jedes `-uitest-*`-Argument.
+/// - `-uitest-seed <promotion-oolong|promotion-matcha>`: füllt den
+///   In-Memory-Speicher mit einem Spielstand kurz vor dem Aufstieg (siehe
+///   `Progress/UITestSeed.swift`). Wirkt nur zusammen mit `-uitest-persona`.
+/// - `-uitest-teabreak-games <id,id,id>`: legt die Spiele der Teepause fest
+///   (Kennungen aus `GameCatalog`, durch Komma getrennt), damit UI-Tests nicht
+///   vom Zufall abhängen. Wirkt nur zusammen mit `-uitest-persona`.
+/// - `-uitest-round-seconds <n>`: verkürzt die Rundendauer der Spiele auf n
+///   Sekunden (Standard 75, siehe `Games/Core/GameRound.swift`). Wirkt nur
+///   zusammen mit `-uitest-persona`.
 struct LaunchConfiguration {
     let personaID: String?
     let clock: FixedClock?
@@ -38,6 +47,21 @@ struct LaunchConfiguration {
     let hasUITestArguments: Bool
     /// `-uitest-show-onboarding`: der Erststart soll trotz UI-Test erscheinen.
     let showOnboarding: Bool
+    /// `-uitest-seed`: gewählter Spielstand, `nil` bei fehlendem oder unbekanntem Wert.
+    let seed: UITestSeed?
+    /// `-uitest-teabreak-games`: feste Spiele der Teepause, leer ohne Argument.
+    let teaBreakGameIDs: [String]
+    /// `-uitest-round-seconds`: verkuerzte Rundendauer, `nil` ohne gueltigen Wert (> 0).
+    let roundSeconds: TimeInterval?
+
+    /// Der Spielstand gilt nur mit Persona (also nur im In-Memory-Speicher).
+    var effectiveSeed: UITestSeed? { personaID == nil ? nil : seed }
+
+    /// Die festen Teepause-Spiele gelten nur mit Persona.
+    var effectiveTeaBreakGameIDs: [String] { personaID == nil ? [] : teaBreakGameIDs }
+
+    /// Die verkuerzte Rundendauer gilt nur mit Persona.
+    var effectiveRoundSeconds: TimeInterval? { personaID == nil ? nil : roundSeconds }
 
     /// Liest die Argumente aus `ProcessInfo.processInfo.arguments`.
     static func fromProcessArguments() -> LaunchConfiguration {
@@ -51,6 +75,14 @@ struct LaunchConfiguration {
         let dateString = value(after: "-uitest-date", in: arguments)
         let appearance = value(after: "-uitest-appearance", in: arguments)
         let gameLevelString = value(after: "-uitest-game-level", in: arguments)
+        let seed = value(after: "-uitest-seed", in: arguments).flatMap { UITestSeed(rawValue: $0) }
+        let roundSeconds = value(after: "-uitest-round-seconds", in: arguments)
+            .flatMap { TimeInterval($0) }
+            .flatMap { $0 > 0 ? $0 : nil }
+        let teaBreakGameIDs = (value(after: "-uitest-teabreak-games", in: arguments) ?? "")
+            .split(separator: ",")
+            .map { String($0).trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty }
 
         let clock: FixedClock? = dateString
             .flatMap { ISO8601DateFormatter().date(from: $0) }
@@ -67,10 +99,6 @@ struct LaunchConfiguration {
         }
 
         let gameLevel: TeaLevel?
-    /// Mindestens ein `-uitest-*`-Argument ist gesetzt (egal welches).
-    let hasUITestArguments: Bool
-    /// `-uitest-show-onboarding`: der Erststart soll trotz UI-Test erscheinen.
-    let showOnboarding: Bool
         switch gameLevelString {
         case "sencha":
             gameLevel = .sencha
@@ -88,7 +116,10 @@ struct LaunchConfiguration {
             colorScheme: colorScheme,
             gameLevel: gameLevel,
             hasUITestArguments: arguments.contains { $0.hasPrefix("-uitest-") },
-            showOnboarding: arguments.contains("-uitest-show-onboarding")
+            showOnboarding: arguments.contains("-uitest-show-onboarding"),
+            seed: seed,
+            teaBreakGameIDs: teaBreakGameIDs,
+            roundSeconds: roundSeconds
         )
     }
 
